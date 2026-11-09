@@ -1,0 +1,1213 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Sugar Maple Tree (Acer saccharum): Museums &amp; the 6D Thermal Matrix (Expert, Simple and Kids)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Atkinson+Hyperlegible:wght@400;700&family=Baloo+2:wght@600;800&family=Young+Serif&display=swap">
+<style>
+/* Layout: masthead, globe stage beside legend column, then anatomy engine with a 6D matrix strip. Warm amber museum-tone dark world. */
+:root{
+  --bg:#0a0806; --panel:#14100b; --panel2:#1c1711; --line:#332a1e;
+  --fg:#f2ebe0; --muted:#a89a86; --gold:#f2bb4b; --amber:#ff9f1c; --cyan:#4de8ff; --violet:#b58cff;
+  --accent:#ff9f1c;
+  --display:"Cormorant Garamond","Iowan Old Style",Georgia,serif;
+  --body:"Hanken Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:60}
+body{background:var(--bg);color:var(--fg);font:15px/1.55 var(--body);
+  padding-block:0 40px;--gut:16px;padding-left:max(var(--gut),env(safe-area-inset-left,0px));padding-right:max(var(--gut),env(safe-area-inset-right,0px));
+  background-image:radial-gradient(1200px 600px at 80% -10%,rgba(255,159,28,.08),transparent 60%),radial-gradient(900px 500px at 0% 20%,rgba(242,187,75,.06),transparent 60%);}
+.wrap{max-width:1500px;margin:0 auto}
+a{color:var(--cyan)}
+a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+header.mast{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:28px 48px;padding-block:44px 28px;border-bottom:1px solid var(--line);align-items:end}
+.eyebrow{font:500 11px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:0 0 16px}
+h1{font:600 clamp(34px,5.6vw,64px)/1.02 var(--display);margin:0;letter-spacing:-.01em;text-wrap:balance}
+h1 em{font-style:italic;color:var(--gold);font-weight:500}
+.author{border-left:1px solid var(--line);padding-left:24px;display:grid;gap:6px;font-size:14px;color:var(--muted)}
+.author b{color:var(--fg);font-weight:600}
+.author .name{font:600 22px/1.2 var(--display);color:var(--fg)}
+.author .row{display:flex;gap:8px;flex-wrap:wrap;align-items:baseline}
+.author .k{font:500 10px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.author a{overflow-wrap:anywhere}
+section{padding-block:34px 4px}
+h2{font:600 clamp(24px,3.2vw,34px)/1.1 var(--display);margin:0 0 4px}
+.sub{color:var(--muted);margin:0 0 18px;max-width:70ch}
+.tag{font:500 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.grid{display:grid;grid-template-columns:minmax(0,1.75fr) minmax(300px,.7fr);gap:20px;align-items:start}
+.stage{background:radial-gradient(circle at 50% 45%,#1a140d,#0a0806 70%);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.view{position:relative}
+.labels{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.lb{position:absolute;left:0;top:0;white-space:nowrap;font:500 11px/1 var(--mono);text-shadow:0 0 2px #2e1a00,0 0 5px #2e1a00,0 0 9px #2e1a00,0 0 12px #2e1a00;will-change:transform}
+.lb.sea{color:#bfe3ff;font-size:12px;font-style:italic;letter-spacing:.16em;text-transform:uppercase}
+.lb.land{color:#ffe0b8;letter-spacing:.18em;font-size:12px}
+.lb.pl{font-size:13px;font-weight:600;color:#fff}
+.lb.pl.core{color:#ffd77a}
+.lb.pl.rel{color:#d3b8ff}
+canvas{display:block;width:100%;touch-action:pan-y;cursor:grab}
+canvas:active{cursor:grabbing}
+#globe{aspect-ratio:16/11;max-height:90vh;min-height:520px;cursor:grab;touch-action:pan-y}
+#globe.drag{cursor:grabbing}
+.pad{position:absolute;right:14px;bottom:14px;display:grid;grid-template-columns:repeat(3,38px);grid-auto-rows:38px;gap:4px;z-index:2}
+.pad button{background:rgba(20,16,11,.85);color:var(--fg);border:1px solid var(--line);border-radius:4px;font:500 17px/1 var(--mono);cursor:pointer}
+.pad button:hover{border-color:var(--gold);color:var(--gold)}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:16px;align-items:start}
+.dimmed{opacity:.38}
+.matrix div.off{opacity:.38}
+.matrix div.off .v{color:var(--muted)}
+.dimnote{font-size:13.5px;color:var(--muted);margin:0 0 14px}
+#tree{aspect-ratio:5/4;max-height:84vh;min-height:420px}
+.hud{display:flex;flex-wrap:wrap;gap:6px 22px;padding:10px 14px;border-top:1px solid var(--line);font:400 12px/1.4 var(--mono);color:var(--muted);background:var(--panel)}
+.hud b{color:var(--cyan);font-weight:500}
+.side{display:grid;gap:16px;min-width:0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:16px;min-width:0}
+.card h3{font:500 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin:0 0 12px}
+.legend{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.legend li{display:flex;gap:10px;align-items:center;font-size:13.5px}
+.sw{flex:none;width:12px;height:12px;border-radius:50%;box-shadow:0 0 10px currentColor;background:currentColor}
+.sw.line{border-radius:0;height:2px;width:18px}
+.toggles{display:grid;grid-template-columns:1fr 1fr;gap:8px 14px;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+label.chk{display:flex;gap:8px;align-items:center;font-size:13.5px;cursor:pointer}
+input[type=checkbox],input[type=radio],input[type=range]{accent-color:var(--accent)}
+.sel h4{font:600 24px/1.15 var(--display);margin:0 0 2px}
+.sel .coords{font:400 12px/1.4 var(--mono);color:var(--amber);margin-bottom:8px}
+.sel p{margin:0;color:var(--muted);font-size:14px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{background:var(--panel2);color:var(--fg);border:1px solid var(--line);border-radius:3px;padding:6px 10px;font:400 12.5px/1.2 var(--body);cursor:pointer;text-align:left}
+.chip:hover{border-color:var(--muted)}
+.chip[aria-pressed=true]{border-color:var(--accent);color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.matrix{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));border-top:1px solid var(--line);background:var(--panel)}
+.matrix div{padding:10px 12px;border-right:1px solid var(--line);min-width:0}
+.matrix div:last-child{border-right:0}
+.matrix .d{font:500 10px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px}
+.matrix .v{font:500 14px/1.2 var(--mono);color:var(--accent);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.ctl{display:grid;gap:6px;margin-bottom:14px}
+.ctl:last-child{margin-bottom:0}
+.ctl .lab{display:flex;justify-content:space-between;gap:10px;font-size:13.5px}
+.ctl .lab span:last-child{font:400 12px/1.5 var(--mono);color:var(--accent);text-align:right}
+.phase{font-size:13.5px;color:var(--muted);margin:0}
+.bars{display:grid;gap:9px}
+.bar{display:grid;grid-template-columns:minmax(0,9.5em) 1fr;gap:10px;align-items:center;font-size:12.5px}
+.bar i{display:block;height:6px;background:var(--panel2);border-radius:3px;overflow:hidden}
+.bar i u{display:block;height:100%;background:var(--muted);text-decoration:none}
+.bar.on i u{background:var(--accent);box-shadow:0 0 10px var(--accent)}
+.bar.on{color:var(--fg)}
+.note{font-size:12.5px;color:var(--muted);margin:10px 0 0}
+footer{margin-top:36px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px;display:flex;flex-wrap:wrap;gap:6px 24px;justify-content:space-between}
+@media (max-width:900px){
+  header.mast{grid-template-columns:1fr}
+  .author{border-left:0;border-top:1px solid var(--line);padding:16px 0 0}
+  .grid{grid-template-columns:1fr}
+  .cards{grid-template-columns:1fr}
+  #globe{aspect-ratio:1/1.2;min-height:0;max-height:none}
+  .pad{grid-template-columns:repeat(8,36px);grid-auto-rows:36px;left:50%;right:auto;bottom:8px;transform:translateX(-50%)}
+  .pad span{display:none}
+  #tree{aspect-ratio:1/1.05;min-height:0;max-height:none}
+  body{--gut:8px}
+  .matrix{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .matrix div:nth-child(3){border-right:0}
+  .matrix div:nth-child(n+4){border-top:1px solid var(--line)}
+}
+
+/* ---- advanced globe tools ---- */
+.tools{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;padding:10px 14px;border-top:1px solid var(--line);background:var(--panel)}
+.tools .chip,.tools input[type=search]{min-height:40px}
+.hud{align-items:center}
+.starbtn{margin-left:auto;display:inline-grid;place-items:center;width:44px;height:44px;border-radius:50%;border:2px solid #9b5de5;background:transparent;color:#b58cff;font-size:22px;line-height:1;cursor:pointer;transition:transform .15s,background .15s;touch-action:manipulation}
+.starbtn:hover{transform:scale(1.08)}
+.starbtn[aria-expanded=true]{background:#9b5de5;color:#fff;box-shadow:0 0 14px rgba(155,93,229,.6)}
+.star{color:#9b5de5;flex:none;width:18px;text-align:center;font-size:16px;line-height:1;text-shadow:0 0 8px rgba(155,93,229,.7)}
+body.kids .starbtn{background:#fff;color:#9b5de5}
+body.kids .starbtn[aria-expanded=true]{background:#9b5de5;color:#fff}
+@media (prefers-reduced-motion:reduce){.starbtn{transition:none}}
+.tools input[type=search]{flex:1 1 200px;min-width:0;background:var(--panel2);color:var(--fg);border:1px solid var(--line);border-radius:4px;padding:8px 10px;font:400 13px var(--body)}
+.sw.leaf{border-radius:50% 0 50% 0;transform:rotate(-8deg)}
+body.simple .sw[style*="#ffffff"],body.kids .sw[style*="#ffffff"]{box-shadow:0 0 0 1.5px var(--fg)}
+.info{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:12px 0 0;font-size:13px}
+.info dt{font:500 10px/1.8 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.info dd{margin:0;color:var(--fg)}
+.lb.pl.mus{color:#fff;font-size:11px;font-weight:500}
+.lb.belt{color:#ffd77a;font-weight:600;letter-spacing:.2em;font-size:13px}
+
+/* ---------- three reading modes: expert (dark, default CSS), simple, kids ---------- */
+body.simple .x-only,body.kids .x-only{display:none!important}
+body:not(.simple) .s-only{display:none!important}
+body:not(.kids) .k-only{display:none!important}
+body:not(.simple):not(.kids) .sk-only{display:none!important}
+.seg{display:inline-flex;margin-top:20px;border:1px solid var(--line);border-radius:99px;overflow:hidden;background:var(--panel)}
+.seg button{min-height:44px;padding:11px 22px;background:transparent;border:0;color:var(--fg);font:600 15px/1 var(--body);cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--accent);color:#1a1208}
+body.simple .seg button[aria-pressed=true]{color:#fff}
+.seg button[data-m=kids]{background:linear-gradient(90deg,#ff6fa5,#ffc21a,#4ad6c3);color:#35176b;font-weight:700}
+.seg button[data-m=kids][aria-pressed=true]{box-shadow:inset 0 0 0 3px #35176b}
+.matrix .v{color:var(--band,var(--accent))}
+.foot2{flex-basis:100%;margin:0}
+
+body.simple,body.kids{color-scheme:light;--mono:var(--body);background-image:none;font-size:17px}
+body.simple{
+  --bg:#faf6ee;--panel:#ffffff;--panel2:#f4ecdd;--line:#d8c9ae;--fg:#2b1b0e;--muted:#5a4633;--gold:#8f5200;--amber:#a34400;--cyan:#9a3b08;--accent:#b03f0a;
+  --display:"Young Serif",Georgia,serif;--body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif}
+body.kids{
+  --bg:#fff1b8;--panel:#ffffff;--panel2:#fff6d6;--line:#35176b;--fg:#35176b;--muted:#5a3a93;--gold:#b84a00;--amber:#b84a00;--cyan:#00697a;--accent:#c2185b;
+  --display:"Baloo 2",system-ui,sans-serif;--body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif}
+/* the two 3D stages stay dark in every mode so the glow colours read well */
+body.simple .stage,body.kids .stage{--panel:#14100b;--panel2:#1c1711;--line:#332a1e;--fg:#f2ebe0;--muted:#b3a58f;--gold:#f2bb4b;--amber:#ff9f1c;--cyan:#4de8ff;--accent:var(--band,#f2bb4b);color:var(--fg)}
+body.kids .stage{background:radial-gradient(circle at 50% 40%,#3a2a8f,#150f40 78%)}
+body.simple h1,body.kids h1,body.simple h2,body.kids h2{font-family:var(--display)}
+body.kids h1,body.kids h2{font-weight:800}
+body.simple .eyebrow,body.simple .tag,body.kids .eyebrow,body.kids .tag{font-family:var(--body);text-transform:none;letter-spacing:.02em;font-size:14px;font-weight:700}
+body.simple .eyebrow{color:var(--cyan)}
+body.simple .tag{color:var(--muted)}
+body.simple h1 em{color:var(--gold)}
+body.kids h1 em{color:#c2185b}
+body.kids .eyebrow{color:#35176b}
+body.kids header.mast{background:#ffd84d;margin-inline:calc(var(--gut) * -1);padding-inline:var(--gut);border-bottom:3px solid #35176b}
+body.simple .author .k,body.kids .author .k{font-family:var(--body)}
+body.kids .author .k{color:#35176b}
+body.kids .card,body.kids .stage{border:3px solid #35176b;border-radius:20px;box-shadow:5px 5px 0 #35176b}
+body.simple .card,body.simple .stage{border-radius:10px}
+body.kids .card h3,body.simple .card h3{font-family:var(--body);text-transform:none;letter-spacing:.01em;font-size:16px;font-weight:800}
+body.kids .chip,body.simple .chip{font-family:var(--body);font-size:15px;font-weight:700;padding:9px 14px;min-height:40px;border-radius:99px}
+body.kids .chip{border:2px solid #35176b;background:#fff;color:#35176b;transition:transform .15s,background .15s}
+body.kids .chip:hover{transform:scale(1.06) rotate(-1.5deg);background:#fff1b8}
+body.kids .stage .chip{background:var(--panel2);border-color:var(--line);color:var(--fg)}
+body.kids .stage .chip:hover{background:#2c2417}
+body.simple .chip[aria-pressed=true],body.kids .chip[aria-pressed=true]{background:var(--accent);color:#fff;border-color:var(--accent);box-shadow:none}
+body.simple .stage .chip[aria-pressed=true],body.kids .stage .chip[aria-pressed=true]{background:var(--accent);color:#1a1208;border-color:var(--accent)}
+body.kids .bar.chip,body.simple .bar.chip{background:none;border:0;border-radius:6px;padding:0;min-height:0;transform:none}
+body.kids .bar.chip:hover{background:none;transform:none}
+body.simple .bar.chip[aria-pressed=true],body.kids .bar.chip[aria-pressed=true]{background:none}
+body.kids .pad button{background:#ffd43b;color:#7a3b00;border:0;border-radius:50%;font-weight:600;box-shadow:0 3px 0 #e8890c}
+body.kids .tools input[type=search]{border-radius:999px;padding:8px 16px;font-size:15px}
+body.simple .tools input[type=search]{font-size:15px}
+body.kids .starbtn{background:#fff;color:#9b5de5}
+body.kids .starbtn[aria-expanded=true]{background:#9b5de5;color:#fff}
+body.simple .sel h4,body.kids .sel h4{font-family:var(--display)}
+body.kids .sel h4{color:#c2185b}
+body.simple .bar,body.kids .bar{font-size:14.5px}
+body.simple .sub,body.kids .sub{font-size:18px}
+body.simple .sub{color:var(--muted)}
+body.kids .sub{color:#35176b}
+body.simple .lb,body.kids .lb{font-family:var(--body)}
+body.simple .info dt,body.kids .info dt{font-family:var(--body);text-transform:none;letter-spacing:.02em;font-size:13px;font-weight:700}
+.lb.camel{font-size:26px;text-shadow:none;display:none;opacity:0}
+body.kids .lb.camel{display:block}
+body.kids .legend li,body.simple .legend li{font-size:15px}
+body.kids label.chk,body.simple label.chk{font-size:15px}
+
+/* ---------- simple + kids extras ---------- */
+.cards3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.cards3 .card h3{margin-bottom:6px}
+.cards3 .card p{margin:0}
+.words dt{font:700 17px/1.3 var(--body);color:var(--cyan)}
+.words dd{margin:0 0 10px}
+.words dd:last-child{margin-bottom:0}
+.btn{font:700 17px/1 var(--body);min-height:48px;padding:14px 22px;border-radius:99px;border:2px solid #35176b;background:#c2185b;color:#fff;cursor:pointer;box-shadow:3px 3px 0 #35176b}
+.btn:disabled{opacity:.55;cursor:default}
+.flips{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.flip{min-height:140px;text-align:left;border:3px solid #35176b;border-radius:20px;padding:18px;cursor:pointer;box-shadow:5px 5px 0 #35176b;font:700 18px/1.35 var(--body);color:#35176b;transition:transform .15s}
+.flip:hover{transform:translateY(-3px) rotate(-.6deg)}
+.flip small{display:block;font-weight:700;letter-spacing:.1em;text-transform:uppercase;opacity:.85;margin-bottom:6px}
+.flip:nth-child(1){background:#ff9ec7}.flip:nth-child(2){background:#9be7ff}.flip:nth-child(3){background:#c7b6ff}.flip:nth-child(4){background:#a8f0a0}.flip:nth-child(5){background:#ffd08a}
+.gamebox{display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,.6fr);gap:20px;align-items:start}
+svg.game{display:block;width:100%;max-height:520px;background:linear-gradient(#aee6ff,#e6f9ff 70%);border:3px solid #35176b;border-radius:20px;box-shadow:5px 5px 0 #35176b;touch-action:manipulation}
+.score{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.score div{background:#fff;border:3px solid #35176b;border-radius:14px;padding:8px;text-align:center;color:#35176b}
+.score b{display:block;font:800 28px/1 var(--display)}
+.score span{font:700 12px/1 var(--body);letter-spacing:.08em;text-transform:uppercase}
+.result{min-height:3em;font:800 22px/1.2 var(--display);margin:0 0 14px}
+.quiz .q{font:800 22px/1.25 var(--display);margin:0 0 14px}
+.opts{display:grid;gap:10px}
+.opt{text-align:left;font:700 18px/1.3 var(--body);min-height:48px;padding:14px 16px;border:3px solid #35176b;border-radius:14px;background:#fff;color:#35176b;cursor:pointer;transition:transform .15s,background .15s}
+.opt:hover{background:#fff1b8;transform:translateX(5px)}
+.opt.good{background:#8be28b}
+.opt.bad{background:#ff9b9b;animation:shake .3s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.prog{font:700 14px/1 var(--body);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
+.badges{display:flex;flex-wrap:wrap;gap:12px}
+.badge{display:flex;align-items:center;gap:10px;padding:12px 16px;border:3px dashed #35176b;border-radius:99px;background:#ffffffcc;color:#35176b;font:700 16px/1.2 var(--body);opacity:.8}
+.badge small{font-weight:400}
+.badge b{display:inline-grid;place-items:center;flex:none;width:34px;height:34px;border-radius:50%;background:#ddd;border:3px solid #35176b;font-size:16px}
+.badge.got{opacity:1;border-style:solid;background:#fff;animation:pop .5s}
+.badge.got b{background:#ffc21a}
+@keyframes pop{50%{transform:scale(1.12) rotate(-2deg)}}
+@media (max-width:900px){.gamebox{grid-template-columns:1fr}.seg button{padding:11px 16px}}
+@media (prefers-reduced-motion:reduce){.opt.bad,.badge.got{animation:none}.flip,.opt,body.kids .chip{transition:none}}
+
+body.simple .hud,body.kids .hud{font-size:14px}
+body.simple .matrix .d,body.kids .matrix .d{font-size:11.5px;letter-spacing:.06em;text-transform:none;font-weight:700}
+body.simple .matrix .v,body.kids .matrix .v{font-size:16px}
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<div class="wrap">
+<header class="mast">
+  <div>
+    <p class="eyebrow" data-i="eyebrow">Simplified version · A holographic map and tree you can explore</p>
+    <h1>Sugar Maple Tree (<em>Acer saccharum</em>): Museums &amp; the 6D Thermal Matrix</h1>
+    <div class="seg" role="group" aria-label="Choose how to read this page">
+      <button type="button" data-m="expert" aria-pressed="false">Expert</button>
+      <button type="button" data-m="simple" aria-pressed="true">Simple</button>
+      <button type="button" data-m="kids" aria-pressed="false"><span aria-hidden="true">🍁</span> Kids</button>
+    </div>
+  </div>
+  <div class="author">
+    <span class="k">Author</span>
+    <span class="name">Asia Khan</span>
+    <b>Behavioural UX Researcher &amp; 3D Spatial Architect</b>
+    <span>Hon. BA, McMaster University</span>
+    <div class="row"><span class="k">Email</span><a href="mailto:asiaaamirkhan@outlook.com">asiaaamirkhan@outlook.com</a></div>
+  </div>
+</header>
+
+<section class="sk-only">
+  <h2 data-i="dhead">What do 3D, 4D, 5D and 6D mean?</h2>
+  <p class="sub" data-i="dsub">Each number adds one more kind of information to the map and the tree.</p>
+  <div class="cards3">
+    <div class="card"><h3 data-i="d3t">3D · Place</h3><p data-i="d3">Three directions: east–west, north–south, and how far you zoom in.</p></div>
+    <div class="card"><h3 data-i="d4t">4D · Time</h3><p data-i="d4">Adds time.</p></div>
+    <div class="card"><h3 data-i="d5t">5D · Light</h3><p data-i="d5">Adds a special camera.</p></div>
+    <div class="card"><h3 data-i="d6t">6D · Contents</h3><p data-i="d6">Adds what the sap is made of.</p></div>
+  </div>
+</section>
+
+<section>
+  <p class="tag" data-i="t1">Layer 01 · Museums &amp; Geo Globe</p>
+  <h2 data-i="h1s">Where the sugar maple grows</h2>
+  <p class="sub" data-i="sub1">Drag to turn the globe.</p>
+  <div class="stage">
+    <div class="view">
+      <canvas id="globe" aria-label="3D globe showing the sugar maple range, syrup production belt and maple heritage museums in northeastern North America"></canvas>
+      <div class="labels" id="gLabels" aria-hidden="true"></div>
+      <div class="pad" role="group" aria-label="Map zoom and move controls">
+        <button id="zIn" aria-label="Zoom in">+</button><button id="pU" aria-label="Move up">▲</button><button id="zOut" aria-label="Zoom out">−</button>
+        <button id="pL" aria-label="Move left">◀</button><button id="pH" aria-label="Reset view">⌂</button><button id="pR" aria-label="Move right">▶</button>
+        <button id="pB" aria-label="Zoom to the maple belt" title="Zoom to the maple belt">🍁</button><button id="pD" aria-label="Move down">▼</button><span></span>
+      </div>
+    </div>
+    <div class="matrix" aria-label="Globe six-dimensional readout">
+      <div><span class="d" data-i="gl1">1 · X lon</span><span class="v" id="gX">-72.0°W</span></div>
+      <div><span class="d" data-i="gl2">2 · Y lat</span><span class="v" id="gY">46.0°N</span></div>
+      <div><span class="d" data-i="gl3">3 · Z zoom</span><span class="v" id="gZ">1.00×</span></div>
+      <div id="gcT"><span class="d" data-i="gl4">4 · T season</span><span class="v" id="gT">—</span></div>
+      <div id="gcL"><span class="d" data-i="gl5">5 · λ band</span><span class="v" id="gL">—</span></div>
+      <div id="gcC"><span class="d" data-i="gl6">6 · C chem</span><span class="v" id="gC">—</span></div>
+    </div>
+    <div class="hud"><span><span data-i="hudSel">Selected</span> <b id="gSel">Quebec</b></span><span id="gPhase"></span><button class="starbtn" id="toolStar" aria-expanded="false" aria-controls="tools" aria-label="Show map tools" title="Show map tools"><span aria-hidden="true">★</span></button></div>
+    <div class="tools" id="tools" role="group" aria-label="Map tools" hidden>
+      <button class="chip" id="bSpin" aria-pressed="false">⟳ Spin</button>
+      <button class="chip" id="bTour" aria-pressed="false">▶ Tour</button>
+      <input type="search" id="q" placeholder="Search places &amp; museums…" aria-label="Search places and museums">
+      <span class="chips" id="fChips"></span>
+    </div>
+  </div>
+  <div class="cards">
+    <div class="card">
+      <h3 data-i="dimH">Dimensions</h3>
+      <div class="chips" id="gDim" style="margin-bottom:12px"></div>
+      <p class="dimnote" id="dimNote"></p>
+      <div class="ctl" id="gTime"><div class="lab"><label for="gSeason" data-i="seasonL">Season</label><span id="gSeasonLab">Mar</span></div>
+        <input type="range" id="gSeason" min="0" max="11" step="1" value="2"></div>
+      <div id="gBandWrap" style="margin-bottom:12px"><h3 style="margin-bottom:8px" data-i="bandH">Spectral band</h3><div class="chips" id="gBand"></div></div>
+      <div id="gChemWrap"><h3 style="margin-bottom:8px" data-i="chemH">Chemistry focus</h3><div class="chips" id="gChem"></div></div>
+    </div>
+    <div class="card">
+      <h3 data-i="legH">Legend</h3>
+      <ul class="legend">
+        <li><span class="sw leaf" style="color:#f2bb4b;width:18px;height:18px"></span><span data-i="lg0">Big gold leaf = maple belt (tap to zoom in)</span></li>
+        <li><span class="sw leaf" style="color:#f2bb4b"></span><span data-i="lg1">Sugar maple range (Acer saccharum)</span></li>
+        <li><span class="sw leaf" style="color:#b58cff"></span><span data-i="lg2">Red maple / other Acer species</span></li>
+        <li><span class="sw leaf" style="color:#ffffff"></span><span data-i="lg3">Maple heritage museum / living collection</span></li>
+        <li><span class="sw line" style="color:#ffffff"></span><span data-i="lg4">Freeze-thaw gradient (sap flow belt)</span></li>
+        <li><span class="sw line" style="color:#f2bb4b"></span><span data-i="lg5">Gold arcs = syrup trade routes</span></li>
+        <li><span class="star" aria-hidden="true">★</span><span data-i="lgStar">Purple star (below the map) = show or hide the map tools</span></li>
+        <li><span class="sw" style="color:#4ade80"></span><span data-i="lg6">Land (recolours in 5D and 6D)</span></li>
+        <li><span class="sw" style="color:#1f78c8"></span><span data-i="lg7">Water (recolours in 5D and 6D)</span></li>
+        <li><span class="sw" style="color:#9fe8ff;opacity:.6"></span><span data-i="lg8">Spring thaw pulse (4D and up)</span></li>
+      </ul>
+      <div class="toggles">
+        <label class="chk"><input type="checkbox" id="tMark" checked><span data-i="tg1">Markers</span></label>
+        <label class="chk"><input type="checkbox" id="tRoute" checked><span data-i="tg2">Gradient</span></label>
+        <label class="chk"><input type="checkbox" id="tGrid" checked><span data-i="tg3">Graticule</span></label>
+        <label class="chk"><input type="checkbox" id="tLabels" checked><span data-i="tg4">Labels</span></label>
+        <label class="chk"><input type="checkbox" id="tArcs" checked><span data-i="tg5">Trade arcs</span></label>
+      </div>
+    </div>
+    <div class="side">
+      <div class="card sel" aria-live="polite">
+        <h3 data-i="selH">Selected place / museum</h3>
+        <h4 id="sName"></h4>
+        <div class="coords" id="sCoords"></div>
+        <p id="sNote"></p>
+        <dl class="info" id="sInfo"></dl>
+      </div>
+      <div class="card">
+        <h3 data-i="plH">Places &amp; Museums</h3>
+        <div class="chips" id="placeList"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <p class="tag" data-i="t2">Layer 02 · Sugar Maple Tree Anatomical Engine</p>
+  <h2 data-i="h2b">Inside the sugar maple, in six dimensions</h2>
+  <p class="sub" data-i="sub2">A simple model of a sugar maple.</p>
+  <div class="grid">
+    <div class="stage">
+      <canvas id="tree" aria-label="Interactive 3D anatomical model of a sugar maple tree (Acer saccharum)"></canvas>
+      <div class="matrix" aria-label="Six-dimensional readout">
+        <div><span class="d" data-i="tl1">1 · X yaw</span><span class="v" id="mX">0°</span></div>
+        <div><span class="d" data-i="tl2">2 · Y pitch</span><span class="v" id="mY">0°</span></div>
+        <div><span class="d" data-i="tl3">3 · Z cut</span><span class="v" id="mZ">0%</span></div>
+        <div><span class="d" data-i="tl4">4 · T season</span><span class="v" id="mT">Mar</span></div>
+        <div><span class="d" data-i="tl5">5 · λ band</span><span class="v" id="mL">Visible</span></div>
+        <div><span class="d" data-i="tl6">6 · C chem</span><span class="v" id="mC">Sucrose</span></div>
+      </div>
+    </div>
+    <div class="side">
+      <div class="card">
+        <h3 data-i="lyH">Anatomical layers</h3>
+        <div class="toggles" style="margin:0;padding:0;border:0">
+          <label class="chk"><input type="checkbox" data-layer="bark" checked><span data-i="ly1">Bark</span></label>
+          <label class="chk"><input type="checkbox" data-layer="canal" checked><span data-i="ly2">Sap canals</span></label>
+          <label class="chk"><input type="checkbox" data-layer="xylem" checked><span data-i="ly3">Xylem core</span></label>
+          <label class="chk"><input type="checkbox" data-layer="roots" checked><span data-i="ly4">Roots</span></label>
+          <label class="chk"><input type="checkbox" data-layer="leaves" checked><span data-i="ly5">Foliage</span></label>
+          <label class="chk"><input type="checkbox" data-layer="resin" checked><span data-i="ly6">Tapping &amp; sap</span></label>
+        </div>
+      </div>
+      <div class="card">
+        <h3 data-i="bandH2">Spectral band</h3>
+        <div class="chips" id="bandList"></div>
+      </div>
+      <div class="card">
+        <h3 data-i="tdH">Time and depth</h3>
+        <div class="ctl"><div class="lab"><label for="season" data-i="seasonL2">Season</label><span id="seasonLab">Mar</span></div>
+          <input type="range" id="season" min="0" max="11" step="1" value="2"></div>
+        <p class="phase" id="phase"></p>
+        <div class="ctl" style="margin-top:14px"><div class="lab"><label for="cut" data-i="cutL">Cutaway depth</label><span id="cutLab">45%</span></div>
+          <input type="range" id="cut" min="0" max="85" step="1" value="45"></div>
+      </div>
+      <div class="card">
+        <h3 data-i="chemH2">Chemistry focus</h3>
+        <div class="bars" id="bars"></div>
+        <p class="note" data-i="barsNote">Bars show an illustrative relative profile for sugar maple sap, not measured values.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="s-only">
+  <h2>Words to know</h2>
+  <dl class="words card" style="margin:0">
+    <dt>Sap</dt><dd>The watery liquid that moves through a maple tree. It is mostly water with a little sugar.</dd>
+    <dt>Tapping</dt><dd>Drilling a small hole in the trunk and fitting a spout so the sap can drip out into a bucket or a tube.</dd>
+    <dt>Freeze-thaw cycle</dt><dd>Nights below freezing followed by days above freezing. The changes in pressure push sap through the tree.</dd>
+    <dt>Sugar bush</dt><dd>A stand of forest where maple trees are tapped to make syrup.</dd>
+    <dt>Syrup</dt><dd>What you get when sap is boiled until most of the water has gone. It takes roughly 40 litres of sap to make 1 litre of syrup.</dd>
+  </dl>
+</section>
+
+<section class="k-only">
+  <h2>Did you know?</h2>
+  <p class="sub">Tap a card to flip it.</p>
+  <div class="flips" id="flips"></div>
+</section>
+
+<section class="k-only">
+  <h2>Game: catch the sap!</h2>
+  <p class="sub">Sap drips from the maple tree. Tap each drop before it hits the snow. You have 30 seconds.</p>
+  <div class="gamebox">
+    <svg id="game" class="game" viewBox="0 0 400 420" role="img" aria-label="Game: tap the falling maple sap drops">
+      <defs><path id="lf" d="M0,-1 L.15,-.72 L.3,-.8 L.26,-.5 L.56,-.62 L.48,-.38 L.82,-.38 L.62,-.12 L.3,-.2 L.09,.05 L.05,.55 L-.05,.55 L-.09,.05 L-.3,-.2 L-.62,-.12 L-.82,-.38 L-.48,-.38 L-.56,-.62 L-.26,-.5 L-.3,-.8 L-.15,-.72Z"/></defs>
+      <ellipse cx="200" cy="392" rx="178" ry="22" fill="#ffffff" stroke="#35176b" stroke-width="3"/>
+      <path d="M166,394 C176,342 163,298 176,252 L226,252 C238,298 224,342 234,394Z" fill="#9a6a45" stroke="#35176b" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M186,384 C192,336 186,300 193,266 M214,384 C210,342 218,304 212,268" stroke="#6b4527" stroke-width="3" fill="none" stroke-linecap="round" opacity=".7"/>
+      <path d="M184,258 L130,204 M201,250 L201,176 M218,258 L276,204 M192,262 L152,232 M210,262 L252,230" stroke="#9a6a45" stroke-width="12" stroke-linecap="round" fill="none"/>
+      <g stroke="#35176b" stroke-width="3" stroke-linejoin="round" vector-effect="non-scaling-stroke">
+        <use href="#lf" transform="translate(200,150) scale(66)" fill="#e8590c" vector-effect="non-scaling-stroke"/>
+        <use href="#lf" transform="translate(116,186) scale(52) rotate(-24)" fill="#f59f00" vector-effect="non-scaling-stroke"/>
+        <use href="#lf" transform="translate(286,186) scale(52) rotate(24)" fill="#e03131" vector-effect="non-scaling-stroke"/>
+        <use href="#lf" transform="translate(150,110) scale(42) rotate(-14)" fill="#ffd43b" vector-effect="non-scaling-stroke"/>
+        <use href="#lf" transform="translate(252,108) scale(42) rotate(16)" fill="#ff8a3d" vector-effect="non-scaling-stroke"/>
+        <use href="#lf" transform="translate(200,86) scale(36)" fill="#c92a2a" vector-effect="non-scaling-stroke"/>
+      </g>
+      <rect x="224" y="296" width="14" height="7" rx="2" fill="#8d96a3" stroke="#35176b" stroke-width="2"/>
+      <path d="M250,352 L290,352 L286,392 L254,392Z" fill="#8d96a3" stroke="#35176b" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M254,352 C256,336 284,336 286,352" fill="none" stroke="#35176b" stroke-width="3"/>
+      <g id="drops"></g>
+    </svg>
+    <div>
+      <div class="score"><div><b id="gScore">0</b><span>Caught</span></div><div><b id="gMiss">0</b><span>Missed</span></div><div><b id="gmTime">30</b><span>Seconds</span></div></div>
+      <p class="result" id="gResult" aria-live="polite">Ready?</p>
+      <button class="btn" id="gStart" type="button">Start game</button>
+    </div>
+  </div>
+</section>
+
+<section class="k-only">
+  <h2>Quiz time</h2>
+  <div class="card quiz" id="quiz" style="max-width:720px"></div>
+</section>
+
+<section class="k-only">
+  <h2>Your badges</h2>
+  <div class="badges" id="badges"></div>
+</section>
+
+<footer>
+  <span data-i="foot">Sugar Maple Tree (Acer saccharum) · Museums &amp; 6D Thermal Matrix. Geography is approximate; land outline is stylised. Tree anatomy is a simplified teaching model.</span>
+  <span>Author: Asia Khan · Hon. BA, McMaster University</span>
+  <p class="note foot2" data-i="foot2">Maple sugaring began with Indigenous peoples of northeastern North America, whose knowledge of the sugar maple long predates the museums shown here.</p>
+</footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+const $=s=>document.querySelector(s);
+const D2R=Math.PI/180, TAU=Math.PI*2;
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const clamp=(v,a=-1.25,b=1.25)=>Math.max(a,Math.min(b,v));
+function ll(lat,lon,r){r=r||1;const p=lat*D2R,l=lon*D2R;return new THREE.Vector3(r*Math.cos(p)*Math.sin(l),r*Math.sin(p),r*Math.cos(p)*Math.cos(l));}
+function fit(renderer,camera,canvas,distFn){
+  const w=canvas.clientWidth,h=canvas.clientHeight; if(!w||!h)return;
+  const s=renderer.getSize(new THREE.Vector2());
+  if(s.x!==w||s.y!==h){renderer.setSize(w,h,false);camera.aspect=w/h;if(distFn)distFn(camera);camera.updateProjectionMatrix();}
+}
+function dragger(canvas,obj,st){
+  let down=false,lx=0,ly=0,moved=0;
+  canvas.addEventListener('pointerdown',e=>{down=true;lx=e.clientX;ly=e.clientY;moved=0;st.vx=0;st.focus=null;try{canvas.setPointerCapture(e.pointerId)}catch(_){}});
+  canvas.addEventListener('pointermove',e=>{if(!down)return;const dx=e.clientX-lx,dy=e.clientY-ly;lx=e.clientX;ly=e.clientY;moved+=Math.abs(dx)+Math.abs(dy);st.vx=dx*.005;obj.rotation.y+=dx*.005;obj.rotation.x=clamp(obj.rotation.x+dy*.005);});
+  const up=e=>{if(!down)return;down=false;if(moved<5&&st.onTap)st.onTap(e);};
+  canvas.addEventListener('pointerup',up);
+  canvas.addEventListener('pointercancel',()=>{down=false});
+  st.down=()=>down;
+}
+
+/* ---------- GLOBE ---------- */
+const places=[
+ {id:'quebec',name:'Quebec, Canada',lat:46.4,lon:-71.2,kind:'core',note:'World capital of maple syrup and home to the Musée de l’érable (Maple Museum) in Saint-Pierre-Baptiste and the Érablière du Cap. Cold nights and warm days in late winter trigger the freeze-thaw pressure that drives sap flow.'},
+ {id:'ontario',name:'Ontario, Canada',lat:44.5,lon:-79.0,kind:'core',note:'Home to the Maple Syrup Museum of Ontario (St. Jacobs) and the Kortright Centre for Conservation’s maple education programs. Warmer winters are shortening the freeze-thaw window.'},
+ {id:'newbrun',name:'New Brunswick',lat:46.5,lon:-66.5,kind:'core',note:'Small but growing producer. The Acadian forest holds mixed stands of sugar maple. Local heritage museums preserve syrup-making traditions.'},
+ {id:'nova',name:'Nova Scotia',lat:45.0,lon:-63.5,kind:'core',note:'Maritime climate: milder winters mean a shorter and more erratic sap season. Ross Farm Museum demonstrates historic syrup production.'},
+ {id:'vermont',name:'Vermont, USA',lat:44.0,lon:-72.7,kind:'rel',note:'Largest US producer and home to the Vermont Maple Museum (Randolph) and the Proctor Maple Research Center. Producers report earlier tapping and more dark, strong-grade syrup in warm years.'},
+ {id:'ny',name:'New York, USA',lat:43.0,lon:-75.5,kind:'rel',note:'Significant US syrup state. The American Maple Museum (Croghan) preserves the industry’s history. Tapping season sensitive to winter temperature variability.'},
+ {id:'maine',name:'Maine, USA',lat:44.7,lon:-69.4,kind:'rel',note:'Northern New England producer. Maine Maple Sunday is a statewide open-house tradition. Cold-climate sap flows driven by freeze-thaw.'}
+];
+places.push(
+ {id:'stjacobs',name:'Maple Syrup Museum of Ontario',lat:43.53,lon:-80.56,kind:'museum',region:'ontario',note:'The Maple Syrup Museum of Ontario in St. Jacobs preserves the history and craft of syrup-making in the province.'},
+ {id:'kortright',name:'Kortright Centre, Vaughan',lat:43.84,lon:-79.58,kind:'museum',region:'ontario',note:'Kortright Centre for Conservation runs maple education programs near Toronto.'},
+ {id:'croghan',name:'American Maple Museum, Croghan',lat:43.89,lon:-75.40,kind:'museum',region:'ny',note:'The American Maple Museum in Croghan, New York, preserves the history of the maple industry.'},
+ {id:'proctor',name:'Proctor Maple Research Center',lat:44.52,lon:-72.87,kind:'museum',region:'vermont',note:'The Proctor Maple Research Center in Underhill, Vermont, studies sugar maple health and syrup production.'},
+ {id:'stpierre',name:'Musée de l’érable',lat:46.19,lon:-71.67,kind:'museum',region:'quebec',note:'The Musée de l’érable in Saint-Pierre-Baptiste, Quebec, explores the history and craft of maple production.'},
+ {id:'ross',name:'Ross Farm Museum, New Ross',lat:44.72,lon:-64.43,kind:'museum',region:'nova',note:'Ross Farm Museum in New Ross, Nova Scotia, demonstrates historic syrup production.'}
+);
+const KIDNOTE={
+ quebec:'Quebec makes more maple syrup than anywhere else in the world! Freezing nights and warm days make the sap run.',
+ ontario:'Ontario has a maple syrup museum and nature programs where you can learn all about maple trees.',
+ newbrun:'New Brunswick has forests full of sugar maples and families who make syrup the old-fashioned way.',
+ nova:'Nova Scotia has milder winters, so the sap season is shorter. Ross Farm Museum shows how syrup was made long ago.',
+ vermont:'Vermont makes the most maple syrup in the USA! It has a maple museum and a center where scientists study maple trees.',
+ ny:'New York has the American Maple Museum, which keeps the story of maple syrup safe.',
+ maine:'Maine has Maple Sunday, when syrup farms open their doors so everybody can visit.',
+ stjacobs:'A museum all about how Ontario makes maple syrup.',
+ kortright:'A nature center near Toronto where you can learn about maple trees.',
+ croghan:'A museum in New York that tells the story of making maple syrup.',
+ proctor:'Scientists here study maple trees to help them stay healthy.',
+ stpierre:'The Maple Museum in Quebec shows how syrup is made.',
+ ross:'A farm museum in Nova Scotia where you can see how people made syrup long ago.'};
+const TYPE={expert:{core:'Syrup region · Canada',rel:'Syrup region · USA',museum:'Museum / living collection'},simple:{core:'Syrup region in Canada',rel:'Syrup region in the USA',museum:'Museum or living collection'},kids:{core:'Maple land in Canada',rel:'Maple land in the USA',museum:'A museum to visit'}};
+const INFOL={expert:{a:'Type',b:'Region',sap:'Sap season',sapv:'Late winter to early spring',lr:'Learn',lrv:'Maple history & craft'},simple:{a:'Kind',b:'Region',sap:'Sap season',sapv:'Late winter to early spring',lr:'You can learn',lrv:'Maple history and how syrup is made'},kids:{a:'What',b:'Where',sap:'Best time',sapv:'Late winter!',lr:'Learn',lrv:'How syrup is made'}};
+const SIMPLE={
+ quebec:'The world’s biggest maple syrup region, and home to the Musée de l’érable. Freezing nights and warm days late in winter make the sap flow.',
+ ontario:'Home to the Maple Syrup Museum of Ontario and maple programs at the Kortright Centre. Warmer winters are making the sap season shorter.',
+ newbrun:'A smaller syrup region with forests of sugar maple. Local museums keep syrup-making traditions alive.',
+ nova:'Winters are milder here, so the sap season is shorter and less steady. Ross Farm Museum shows how syrup was made long ago.',
+ vermont:'The biggest syrup producer in the USA, with a maple museum and the Proctor Maple Research Center. In warm years, producers tap earlier.',
+ ny:'A big US syrup state. The American Maple Museum in Croghan keeps the story of the industry.',
+ maine:'A northern syrup state. Maine Maple Sunday is a yearly open-house day at syrup farms.',
+ stjacobs:'A museum about the history and craft of syrup-making in Ontario.',
+ kortright:'A conservation centre near Toronto that runs maple education programs.',
+ croghan:'A museum in New York that keeps the history of the maple industry.',
+ proctor:'A research centre in Vermont that studies sugar maple health and syrup production.',
+ stpierre:'A museum in Quebec about the history and craft of making maple products.',
+ ross:'A farm museum in Nova Scotia that shows how syrup was made in the past.'};
+let kids=false,spin=false,curSel='quebec',arcsOn=true,routeOn=true;
+let mode='simple',badgesReady=false;const seenPl={};const MI={expert:0,simple:1,kids:2};
+const $$=s=>Array.prototype.slice.call(document.querySelectorAll(s));
+const kindCol={core:0xf2bb4b,rel:0xc9a8ff,trade:0xffffff,museum:0xffffff};
+
+const gCanvas=$('#globe');
+const gR=new THREE.WebGLRenderer({canvas:gCanvas,antialias:true,alpha:true});
+gR.setPixelRatio(Math.min(devicePixelRatio||1,2));
+const gS=new THREE.Scene();
+const gCam=new THREE.PerspectiveCamera(32,1,.1,50);
+const homeZ=c=>{const th=Math.atan(Math.tan(16*D2R)*Math.min(1,c.aspect||1));return 1.07/Math.sin(th);};
+const tgt={x:0,y:0,z:2.4};let moved=false;
+const rotT={x:45*D2R,y:72*D2R};
+const setDist=c=>{if(!moved){tgt.z=homeZ(c);c.position.z=tgt.z;}};
+setDist(gCam);
+const globe=new THREE.Group();gS.add(globe);
+
+// dark core so back-side dots stay hidden
+const seaMat=new THREE.MeshBasicMaterial({color:0x0e3a6b});
+globe.add(new THREE.Mesh(new THREE.SphereGeometry(.985,48,48),seaMat));
+
+// land from rough polygons — focused on North America
+const polys=[
+ [[-168,66],[-140,70],[-120,70],[-95,72],[-80,74],[-60,60],[-55,52],[-65,45],[-70,42],[-75,35],[-80,25],[-90,29],[-97,26],[-105,22],[-115,29],[-125,40],[-135,55],[-150,60],[-168,66]],
+ [[-85,47],[-75,47],[-65,47],[-60,46],[-55,50],[-60,55],[-75,58],[-85,52]],
+ [[-95,49],[-80,49],[-70,47],[-60,47],[-60,44],[-75,44],[-85,44],[-95,45]],
+ [[-80,42],[-70,42],[-65,42],[-62,44],[-70,45],[-80,45]],
+ [[-55,60],[-30,60],[-20,70],[-25,82],[-45,83],[-60,75]],
+ [[-97,26],[-90,22],[-87,21],[-83,10],[-77,8],[-83,15],[-88,17],[-92,18],[-95,22]],
+ [[-84,22],[-77,20],[-74,20],[-80,23]],
+ [[-80,10],[-60,10],[-35,-6],[-40,-22],[-58,-38],[-70,-52],[-75,-30],[-80,-5]],
+ [[-10,36],[-9,43],[-2,44],[-5,48],[2,51],[8,54],[10,57],[12,55],[20,55],[24,60],[30,60],[30,70],[60,70],[60,45],[50,40],[40,37],[30,36],[20,38],[10,38],[0,36],[-10,36]],
+ [[-24,64],[-14,64],[-14,66],[-22,66]],
+ [[-10,51],[-2,51],[-2,58],[-5,58],[-8,55],[-10,52]],
+ [[-10,52],[-6,52],[-6,58],[-10,58]],
+ [[-17,21],[-17,14],[-12,7],[-8,4.5],[5,5],[9,4],[10,-2],[13,-10],[12,-18],[15,-27],[18,-34],[25,-34],[32,-28],[35,-22],[40,-15],[40,-10],[39,-5],[41,-2],[43,.5],[46,2.5],[48.5,5],[49.8,7],[50.9,10],[51.2,11.8],[49,11.3],[47,11.2],[45,10.4],[43.2,11.6],[42.6,12.5],[41.5,13.8],[39.7,15.4],[38.5,18],[37.2,21],[36,23.5],[34,27],[32.6,29.9],[32,31.3],[25,32],[20,31],[10,34],[10,37],[0,36],[-6,35],[-10,30]],
+ [[26,40],[35,42],[45,45],[55,50],[65,55],[75,60],[85,60],[95,60],[105,58],[115,55],[125,52],[135,48],[140,45],[145,45],[150,55],[155,60],[160,60],[170,62],[180,65],[180,70],[160,72],[140,75],[120,77],[100,77],[80,75],[60,70],[40,70],[30,68],[28,62],[30,58],[35,55],[38,50],[36,46],[35,42],[30,40]],
+ [[113,-22],[130,-12],[142,-11],[150,-22],[153,-28],[150,-38],[140,-38],[130,-32],[120,-34],[114,-28]],
+ [[172,-34],[178,-38],[174,-42],[168,-46],[166,-44],[170,-40]]
+];
+const lc=document.createElement('canvas');lc.width=1024;lc.height=512;
+const lx=lc.getContext('2d');lx.fillStyle='#fff';
+polys.forEach(p=>{lx.beginPath();p.forEach((q,i)=>{const x=(q[0]+180)*1024/360,y=(90-q[1])*512/180;i?lx.lineTo(x,y):lx.moveTo(x,y);});lx.closePath();lx.fill();});
+const px=lx.getImageData(0,0,1024,512).data;
+const pts=[];
+for(let lat=-62;lat<=84;lat+=.7){const dl=.7/Math.max(.2,Math.cos(lat*D2R));
+  for(let lon=-180;lon<180;lon+=dl){if(lat>=30&&lat<=64&&lon>=-100&&lon<=-40)continue;const x=Math.floor((lon+180)*1024/360),y=Math.floor((90-lat)*512/180);
+    if(px[(y*1024+x)*4+3]>128){const v=ll(lat,lon,1.001);pts.push(v.x,v.y,v.z);}}}
+// denser land dots over the maple region, which is where the camera starts
+for(let lat=30;lat<=64;lat+=.5){const dl=.5/Math.max(.2,Math.cos(lat*D2R));
+  for(let lon=-100;lon<=-40;lon+=dl){const x=Math.floor((lon+180)*1024/360),y=Math.floor((90-lat)*512/180);
+    if(px[(y*1024+x)*4+3]>128){const v=ll(lat,lon,1.001);pts.push(v.x,v.y,v.z);}}}
+const pg=new THREE.BufferGeometry();pg.setAttribute('position',new THREE.Float32BufferAttribute(pts,3));
+const landMat=new THREE.PointsMaterial({color:0x4ade80,size:.0085,sizeAttenuation:true,transparent:true,opacity:1});
+globe.add(new THREE.Points(pg,landMat));
+
+// graticule every 5 degrees
+const grat=new THREE.Group();
+const gm=new THREE.LineBasicMaterial({color:0xffd0a0,transparent:true,opacity:.22});
+for(let lat=-60;lat<=80;lat+=5){const a=[];for(let i=0;i<=120;i++)a.push(ll(lat,i/120*360,1.002));grat.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(a),gm));}
+for(let lon=0;lon<360;lon+=5){const a=[];for(let i=0;i<=60;i++)a.push(ll(-80+i/60*160,lon,1.002));grat.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(a),gm));}
+globe.add(grat);
+
+// atmosphere
+gS.add(new THREE.Mesh(new THREE.SphereGeometry(1.14,48,48),new THREE.ShaderMaterial({
+ transparent:true,side:THREE.BackSide,blending:THREE.AdditiveBlending,depthWrite:false,
+ vertexShader:'varying vec3 n;void main(){n=normalize(normalMatrix*normal);gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',
+ fragmentShader:'varying vec3 n;void main(){float i=pow(.72-dot(n,vec3(0.,0.,1.)),3.);gl_FragColor=vec4(1.,.8,.4,1.)*i*1.3;}'})));
+
+// range glow zones
+const zones=[['quebec',3.5,0xf2bb4b],['ontario',2.5,0xf2bb4b],['newbrun',2.0,0xf2bb4b],['nova',1.2,0xf2bb4b],['vermont',1.5,0xc9a8ff],['ny',1.5,0xc9a8ff],['maine',1.3,0xc9a8ff]];
+const zoneObjs=[];
+zones.forEach(z=>{const p=places.find(q=>q.id===z[0]);
+  const c=new THREE.Mesh(new THREE.CircleGeometry(z[1]*D2R,48),new THREE.MeshBasicMaterial({color:z[2],transparent:true,opacity:.3,depthWrite:false,side:THREE.DoubleSide}));
+  c.position.copy(ll(p.lat,p.lon,1.003));c.lookAt(c.position.clone().multiplyScalar(2));globe.add(c);
+  const e=[];for(let i=0;i<=64;i++){const a=i/64*TAU;e.push(new THREE.Vector3(Math.cos(a)*z[1]*D2R,Math.sin(a)*z[1]*D2R,0));}
+  const ln=new THREE.Line(new THREE.BufferGeometry().setFromPoints(e),new THREE.LineBasicMaterial({color:z[2],transparent:true,opacity:.9}));
+  ln.position.copy(c.position);ln.quaternion.copy(c.quaternion);globe.add(ln);
+  zoneObjs.push({id:z[0],rel:z[0]==='vermont'||z[0]==='ny'||z[0]==='maine',c,ln});});
+// thaw mist pulse over Quebec
+const mist=new THREE.Mesh(new THREE.CircleGeometry(4.5*D2R,48),new THREE.MeshBasicMaterial({color:0x9fe8ff,transparent:true,opacity:0,depthWrite:false,side:THREE.DoubleSide}));
+{const p=places[0];mist.position.copy(ll(p.lat,p.lon,1.002));mist.lookAt(mist.position.clone().multiplyScalar(2));globe.add(mist);}
+// markers
+// maple leaf shape (right half mirrored), centred on the origin
+const leafGeo=(()=>{const h=[[0,1],[.15,.72],[.3,.8],[.26,.5],[.56,.62],[.48,.38],[.82,.38],[.62,.12],[.3,.2],[.09,-.05],[.05,-.55]];
+  const sh=new THREE.Shape();h.forEach((q,i)=>i?sh.lineTo(q[0],q[1]):sh.moveTo(q[0],q[1]));
+  for(let i=h.length-1;i>=1;i--)sh.lineTo(-h[i][0],h[i][1]);sh.closePath();
+  const g=new THREE.ShapeGeometry(sh);g.translate(0,-.225,0);return g;})();
+const markers=new THREE.Group();globe.add(markers);
+const hit=[],rings=[];
+const beltLeaf=new THREE.Mesh(leafGeo,new THREE.MeshBasicMaterial({color:0xf2bb4b,side:THREE.DoubleSide}));
+{const bp=ll(45,-72,1.01);beltLeaf.position.copy(bp);beltLeaf.lookAt(bp.clone().multiplyScalar(2));
+ const bo=new THREE.Mesh(leafGeo,new THREE.MeshBasicMaterial({color:0x2e1a00,side:THREE.DoubleSide}));bo.scale.setScalar(1.18);bo.position.z=-.04;beltLeaf.add(bo);
+ beltLeaf.userData.belt=true;markers.add(beltLeaf);hit.push(beltLeaf);}
+places.forEach((p,i)=>{
+  const pos=ll(p.lat,p.lon,1.006);
+  const m=new THREE.Mesh(leafGeo,new THREE.MeshBasicMaterial({color:kindCol[p.kind],side:THREE.DoubleSide}));
+  p.base=p.kind==='core'?.015:p.kind==='museum'?.010:.013;m.scale.setScalar(p.base);
+  {const o=new THREE.Mesh(leafGeo,new THREE.MeshBasicMaterial({color:0x2e1a00,side:THREE.DoubleSide}));o.scale.setScalar(1.22);o.position.z=-.04;m.add(o);}
+  m.position.copy(pos);m.lookAt(pos.clone().multiplyScalar(2));m.userData.p=p;markers.add(m);hit.push(m);
+  const r=new THREE.Mesh(new THREE.RingGeometry(.028,.033,40),new THREE.MeshBasicMaterial({color:kindCol[p.kind],transparent:true,side:THREE.DoubleSide,depthWrite:false}));
+  r.position.copy(ll(p.lat,p.lon,1.004));r.lookAt(r.position.clone().multiplyScalar(2));r.userData.ph=i*.13;markers.add(r);rings.push(r);
+  p.mesh=m;p.ring=r;
+});
+
+// freeze-thaw gradient band across the syrup belt (Quebec → Vermont → NY)
+const route=new THREE.Group();globe.add(route);
+const path=[];
+const belt=['quebec','ontario','vermont','ny','maine'];
+for(let i=0;i<belt.length-1;i++){
+  const a=ll(places.find(q=>q.id===belt[i]).lat,places.find(q=>q.id===belt[i]).lon,1);
+  const b=ll(places.find(q=>q.id===belt[i+1]).lat,places.find(q=>q.id===belt[i+1]).lon,1);
+  for(let k=0;k<=28;k++){const t=k/28;path.push(a.clone().lerp(b,t).normalize().multiplyScalar(1.004+Math.min(.045,a.distanceTo(b)*.25)*Math.sin(Math.PI*t)));}
+}
+route.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(path),new THREE.LineBasicMaterial({color:0xffffff,transparent:true,opacity:.9})));
+const caravan=new THREE.Mesh(new THREE.SphereGeometry(.008,12,12),new THREE.MeshBasicMaterial({color:0xffffff}));route.add(caravan);
+// gold trade arcs with travelling syrup drops
+const arcs=new THREE.Group();globe.add(arcs);const arcDots=[];
+[['quebec','vermont'],['quebec','ny'],['ontario','ny'],['quebec','newbrun'],['newbrun','nova'],['maine','newbrun'],['vermont','maine'],['ontario','quebec']].forEach(pr=>{
+  const A=places.find(q=>q.id===pr[0]),B=places.find(q=>q.id===pr[1]);
+  const a=ll(A.lat,A.lon,1),b=ll(B.lat,B.lon,1),pts=[];
+  for(let k=0;k<=40;k++){const t=k/40;pts.push(a.clone().lerp(b,t).normalize().multiplyScalar(1.006+Math.min(.07,a.distanceTo(b)*.3)*Math.sin(Math.PI*t)));}
+  arcs.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),new THREE.LineBasicMaterial({color:0xf2bb4b,transparent:true,opacity:.75})));
+  const d=new THREE.Mesh(new THREE.SphereGeometry(.005,8,8),new THREE.MeshBasicMaterial({color:0xfff1c1}));arcs.add(d);arcDots.push({d,pts,off:Math.random()});
+});
+
+// labels
+const gl=$('#gLabels'),LB=[];
+const TIERS={'Pacific Ocean':[2.4,99,3],'Atlantic Ocean':[2.4,99,3],'CANADA':[2.4,99,4],'UNITED STATES':[2.4,99,4],
+ 'Hudson Bay':[1.6,3.4,2],'Gulf of St. Lawrence':[1.5,2.8,2],'Lake Superior':[1.6,2.8,1],'Lake Michigan':[1.6,2.8,1],'Lake Huron':[1.6,2.8,1],'Lake Erie':[1.4,2.4,1],'Lake Ontario':[1.4,2.4,1],
+ 'QUEBEC':[2.05,3.4,3],'ONTARIO':[2.05,3.4,3],'VERMONT':[2.05,3.4,2],'NEW YORK':[2.05,3.4,2],'MAINE':[2.05,3.4,2],'NEW BRUNSWICK':[2.05,3.4,2],'NOVA SCOTIA':[2.05,3.4,2]};
+function addLB(txt,lat,lon,cls,anc,tier,ref){const e=document.createElement('div');e.className='lb '+cls;e.textContent=txt;gl.appendChild(e);LB.push({e,v:ll(lat,lon,1.01),anc:anc||'c',zmin:tier?tier[0]:0,zmax:tier?tier[1]:99,pri:tier?tier[2]:1,ref:ref||null,w:0,h:0});}
+function remeasureLB(){LB.forEach(l=>{l.w=0;});}
+if(document.fonts){document.fonts.addEventListener('loadingdone',remeasureLB);}
+[['Hudson Bay',58,-85,'sea'],['Atlantic Ocean',40,-50,'sea'],['Pacific Ocean',35,-150,'sea'],['Gulf of St. Lawrence',48,-60,'sea'],['Lake Superior',48,-88,'sea'],['Lake Michigan',44,-87,'sea'],['Lake Huron',45,-82,'sea'],['Lake Erie',42,-81,'sea'],['Lake Ontario',43.5,-77.5,'sea'],
+ ['CANADA',56,-100,'land'],['UNITED STATES',40,-98,'land'],['QUEBEC',48,-72,'land'],['ONTARIO',48,-84,'land'],['VERMONT',44,-72.7,'land'],['NEW YORK',43,-75.5,'land'],['MAINE',45,-69,'land'],['NEW BRUNSWICK',46.5,-66.5,'land'],['NOVA SCOTIA',45,-63.5,'land']
+].forEach(g=>addLB(g[0],g[1],g[2],g[3],'c',TIERS[g[0]]));
+addLB('MAPLE BELT',45,-72,'land belt','b',[2.5,99,6]);
+const shortN={quebec:'Quebec · Musée de l’érable',ontario:'Ontario · Maple Syrup Museum',newbrun:'New Brunswick',nova:'Nova Scotia · Ross Farm',vermont:'Vermont · Maple Museum',ny:'New York · American Maple Museum',maine:'Maine · Maple Sunday'};
+const ancN={quebec:'b',ontario:'l',newbrun:'r',nova:'r',vermont:'b',ny:'r',maine:'r'};
+places.forEach(p=>addLB(shortN[p.id]||p.name,p.lat,p.lon,'pl '+(p.kind==='museum'?'mus':p.kind),ancN[p.id]||'r',p.kind==='museum'?[0,2.0,2]:[0,2.0,p.kind==='core'?5:4],p));
+const ANC={c:'translate(-50%,-50%)',l:'translate(calc(-100% - 10px),-50%)',r:'translate(10px,-50%)',t:'translate(-50%,calc(-100% - 10px))',b:'translate(-50%,10px)'};
+const tmpV=new THREE.Vector3();
+function updLB(){
+  const w=gCanvas.clientWidth,h=gCanvas.clientHeight,cp=gCam.position,z=cp.z,cand=[];
+  LB.forEach(l=>{
+    const sel=l.ref&&l.ref.id===curSel;
+    tmpV.copy(l.v).applyMatrix4(globe.matrixWorld);
+    const op=Math.max(0,Math.min(1,(tmpV.dot(cp)-1.02)/.4));
+    if(op<=0||(l.ref&&!l.ref.ok)||(!sel&&(z<l.zmin||z>l.zmax))||(sel&&z>2.6)){l.e.style.display='none';return;}
+    tmpV.project(gCam);
+    const x=(tmpV.x*.5+.5)*w,y=(-tmpV.y*.5+.5)*h;
+    if(x<-40||x>w+40||y<-20||y>h+20){l.e.style.display='none';return;}
+    cand.push({l,x,y,op,pr:sel?9:l.pri});
+  });
+  cand.sort((a,b)=>b.pr-a.pr);
+  const placed=[];
+  cand.forEach(c=>{
+    const l=c.l,e=l.e;
+    if(!l.w){e.style.display='';e.style.transform='translate(-9999px,-9999px)';l.w=e.offsetWidth||60;l.h=e.offsetHeight||14;}
+    let x0=c.x-l.w/2,y0=c.y-l.h/2;
+    if(l.anc==='l'){x0=c.x-10-l.w;}else if(l.anc==='r'){x0=c.x+10;}else if(l.anc==='t'){y0=c.y-10-l.h;}else if(l.anc==='b'){y0=c.y+10;}
+    if(x0<4||x0+l.w>w-4||y0<2||y0+l.h>h-2){e.style.display='none';return;}
+    const R=[x0-3,y0-2,x0+l.w+3,y0+l.h+2];
+    if(placed.some(q=>R[0]<q[2]&&R[2]>q[0]&&R[1]<q[3]&&R[3]>q[1])){e.style.display='none';return;}
+    placed.push(R);
+    e.style.display='';e.style.opacity=c.op;e.style.transform='translate('+x0.toFixed(1)+'px,'+y0.toFixed(1)+'px)';
+  });
+}
+// selection + interaction
+const gst={vx:0,focus:null};
+const pl=$('#placeList');
+places.forEach(p=>{const b=document.createElement('button');b.className='chip';b.textContent=p.name;b.setAttribute('aria-pressed','false');b.dataset.id=p.id;b.onclick=()=>select(p.id,true);pl.appendChild(b);});
+function select(id,go){
+  const p=places.find(q=>q.id===id);if(!p)return;
+  $('#sName').textContent=p.name;
+  $('#sCoords').textContent=Math.abs(p.lat).toFixed(2)+'°'+(p.lat>=0?'N':'S')+' '+Math.abs(p.lon).toFixed(2)+'°'+(p.lon>=0?'E':'W');
+  $('#sNote').textContent=mode==='kids'?(KIDNOTE[p.id]||p.note):mode==='simple'?(SIMPLE[p.id]||p.note):p.note;$('#gSel').textContent=p.name;seenPl[id]=1;if(badgesReady)checkBadges();
+  {const L=INFOL[mode],rg=p.region?places.find(q=>q.id===p.region).name:p.name,ty=TYPE[mode][p.kind];
+   const r3=p.kind==='museum'?[L.lr,L.lrv]:[L.sap,L.sapv];
+   $('#sInfo').innerHTML='<dt>'+L.a+'</dt><dd>'+ty+'</dd><dt>'+L.b+'</dt><dd>'+rg+'</dd><dt>'+r3[0]+'</dt><dd>'+r3[1]+'</dd>';}
+  pl.querySelectorAll('.chip').forEach(c=>c.setAttribute('aria-pressed',String(c.dataset.id===id)));
+  curSel=id;
+  if(go){setSpin(false);moved=true;rotT.x=Math.max(-1.3,Math.min(1.3,p.lat*D2R));rotT.y=-p.lon*D2R;tgt.z=Math.min(tgt.z,1.8);}
+}
+const ray=new THREE.Raycaster(),ndc=new THREE.Vector2();
+gst.onTap=e=>{
+  const r=gCanvas.getBoundingClientRect();
+  ndc.set(((e.clientX-r.left)/r.width)*2-1,-((e.clientY-r.top)/r.height)*2+1);
+  ray.setFromCamera(ndc,gCam);
+  const h=ray.intersectObjects(hit).find(x=>x.object.visible);
+  if(h&&h.object.userData.belt){flyBelt();if(kids)fun(e.clientX,e.clientY,22,1);}else if(h){select(h.object.userData.p.id,true);if(kids)fun(e.clientX,e.clientY,22,1);}
+};
+const clampP=v=>Math.max(-1.3,Math.min(1.3,v));
+const zoomBy=f=>{moved=true;tgt.z=Math.max(1.15,Math.min(6.5,tgt.z*f));};
+const panStep=(dx,dy)=>{moved=true;const s=.15*Math.max(.3,(tgt.z-.9)/2.5);rotT.y-=dx*s;rotT.x=Math.max(-1.3,Math.min(1.3,rotT.x+dy*s));};
+const goHome=()=>{tgt.x=0;tgt.y=0;tgt.z=homeZ(gCam);moved=false;rotT.x=45*D2R;rotT.y=72*D2R;};
+function flyBelt(){moved=true;rotT.x=45*D2R;rotT.y=72*D2R;tgt.z=Math.min(tgt.z,1.9);}
+(function(){
+  let dn=false,lx=0,ly=0,mv=0,pd=0;const pt=new Map();
+  gCanvas.addEventListener('pointerdown',e=>{pt.set(e.pointerId,[e.clientX,e.clientY]);if(tourT)setTour(false);dn=true;lx=e.clientX;ly=e.clientY;mv=0;try{gCanvas.setPointerCapture(e.pointerId)}catch(_){}});
+  gCanvas.addEventListener('pointermove',e=>{if(pt.has(e.pointerId))pt.set(e.pointerId,[e.clientX,e.clientY]);
+    if(pt.size===2){const v=[...pt.values()],d=Math.hypot(v[0][0]-v[1][0],v[0][1]-v[1][1]);if(pd)zoomBy(pd/d);pd=d;return;}
+    if(!dn)return;const dx=e.clientX-lx,dy=e.clientY-ly;lx=e.clientX;ly=e.clientY;mv+=Math.abs(dx)+Math.abs(dy);
+    if(mv>4){gCanvas.classList.add('drag');moved=true;const k=2*Math.tan(16*D2R)*Math.max(.15,gCam.position.z-1)/gCanvas.clientHeight;rotT.y+=dx*k;rotT.x=Math.max(-1.3,Math.min(1.3,rotT.x+dy*k));globe.rotation.y=rotT.y;globe.rotation.x=rotT.x;}});
+  gCanvas.addEventListener('pointerup',e=>{const multi=pt.size>1;pt.delete(e.pointerId);pd=0;if(!dn)return;if(multi)mv=99;dn=false;gCanvas.classList.remove('drag');if(mv<5)gst.onTap(e);});
+  gCanvas.addEventListener('pointercancel',e=>{pt.delete(e.pointerId);pd=0;dn=false;gCanvas.classList.remove('drag');});
+  gCanvas.addEventListener('wheel',e=>{e.preventDefault();zoomBy(Math.exp(e.deltaY*.0015));},{passive:false});
+  $('#zIn').onclick=()=>zoomBy(.8);$('#zOut').onclick=()=>zoomBy(1.25);
+  $('#pU').onclick=()=>panStep(0,1);$('#pD').onclick=()=>panStep(0,-1);$('#pL').onclick=()=>panStep(-1,0);$('#pR').onclick=()=>panStep(1,0);
+  $('#pH').onclick=goHome;$('#pB').onclick=flyBelt;
+})();
+globe.rotation.set(45*D2R,72*D2R,0);
+select('quebec');
+$('#tMark').onchange=e=>{markers.visible=e.target.checked};
+$('#tRoute').onchange=e=>{routeOn=e.target.checked};
+$('#tGrid').onchange=e=>{grat.visible=e.target.checked};
+$('#tLabels').onchange=e=>{gl.style.display=e.target.checked?'':'none'};
+$('#tArcs').onchange=e=>{arcsOn=e.target.checked};
+let filt='all',tourT=null,tourI=0;
+const bSp=$('#bSpin'),bTo=$('#bTour'),fC=$('#fChips');
+function setSpin(on){spin=on;bSp.setAttribute('aria-pressed',String(on));}
+function setTour(on){
+  if(tourT){clearInterval(tourT);tourT=null;}
+  bTo.setAttribute('aria-pressed',String(on));bTo.textContent=on?'■ Stop':(kids?'▶ Fly around!':'▶ Tour');
+  if(on){setSpin(false);
+    const step=()=>{const list=places.filter(q=>q.ok);if(!list.length){setTour(false);return;}
+      const q=list[tourI++%list.length];select(q.id,true);
+      if(kids){const r=gCanvas.getBoundingClientRect();fun(r.left+r.width/2,r.top+r.height/2,14,1);}};
+    step();tourT=setInterval(step,4200);}
+}
+bSp.onclick=()=>{setSpin(!spin);if(spin)setTour(false);};
+bTo.onclick=()=>setTour(!tourT);
+[['all','All'],['region','Regions'],['museum','Museums']].forEach(f=>{
+  const b=document.createElement('button');b.className='chip';b.textContent=f[1];b.dataset.f=f[0];b.setAttribute('aria-pressed',String(f[0]==='all'));
+  b.onclick=()=>{filt=f[0];fC.querySelectorAll('.chip').forEach(c=>c.setAttribute('aria-pressed',String(c===b)));applyFilter();};fC.appendChild(b);});
+function applyFilter(){
+  const q=$('#q').value.trim().toLowerCase();
+  places.forEach(p=>{const ok=(filt==='all'||(filt==='museum'?p.kind==='museum':p.kind!=='museum'))&&(!q||(p.name+' '+p.note).toLowerCase().includes(q));
+    p.ok=ok;p.mesh.visible=ok;p.ring.visible=ok;});
+  pl.querySelectorAll('.chip').forEach(c=>{c.hidden=!places.find(x=>x.id===c.dataset.id).ok;});
+}
+$('#q').addEventListener('input',applyFilter);
+const toolsEl=$('#tools'),stBtn=$('#toolStar');
+function setTools(open){toolsEl.hidden=!open;stBtn.setAttribute('aria-expanded',String(open));
+  const l=open?'Hide map tools':'Show map tools';stBtn.setAttribute('aria-label',l);stBtn.title=l;}
+stBtn.onclick=()=>setTools(toolsEl.hidden);
+toolsEl.addEventListener('keydown',e=>{if(e.key==='Escape'){setTools(false);stBtn.focus();}});
+applyFilter();
+
+/* ---------- SUGAR MAPLE TREE ---------- */
+const tCanvas=$('#tree');
+const tR=new THREE.WebGLRenderer({canvas:tCanvas,antialias:true,alpha:true});
+tR.setPixelRatio(Math.min(devicePixelRatio||1,2));tR.localClippingEnabled=true;
+const tS=new THREE.Scene();
+const tCam=new THREE.PerspectiveCamera(38,1,.1,60);
+const tDist=c=>{const k=Math.max(1,.8/c.aspect);c.position.set(2.6*k,2.4*k+.4,6.2*k);c.lookAt(0,1.5,0);};
+tDist(tCam);
+const tree=new THREE.Group();tS.add(tree);
+tree.rotation.y=-.5;
+const clip=new THREE.Plane(new THREE.Vector3(-1,0,0),.4);
+const P={bark:[],canal:[],xylem:[],roots:[],leaves:[],resin:[]};
+const layers={};
+function M(kind,o){
+  o=o||{};
+  const m=o.line?new THREE.LineBasicMaterial({transparent:true,opacity:o.op||.8,clippingPlanes:[clip]})
+    :new THREE.MeshBasicMaterial({transparent:true,opacity:o.op||.3,side:THREE.DoubleSide,wireframe:!!o.wire,depthWrite:false,blending:o.add?THREE.AdditiveBlending:THREE.NormalBlending,clippingPlanes:[clip]});
+  m.userData.k=kind;P[kind].push(m);return m;
+}
+function lay(k){return layers[k]||(layers[k]=new THREE.Group());}
+const TOP=2.3,H=2.3,trunkR=y=>.82-.27*(y/H);
+// trunk
+const tg=new THREE.CylinderGeometry(.55,.82,H,44,16,true);
+{const a=tg.attributes.position;for(let i=0;i<a.count;i++){const x=a.getX(i),y=a.getY(i),z=a.getZ(i);
+  const b=1+.07*Math.sin(y*5+Math.atan2(z,x)*3)+.04*Math.sin(y*11+Math.atan2(z,x)*7);a.setXYZ(i,x*b,y,z*b);}tg.computeVertexNormals();}
+const barkA=new THREE.Mesh(tg,M('bark',{op:.16,add:true}));
+const barkB=new THREE.Mesh(tg,M('bark',{wire:true,op:.55,add:true}));
+barkA.position.y=barkB.position.y=H/2;lay('bark').add(barkA,barkB);
+// cambium shell + sap canals
+const camb=new THREE.Mesh(new THREE.CylinderGeometry(.47,.66,H*.98,36,1,true),M('canal',{op:.12,add:true}));
+camb.position.y=H/2;lay('canal').add(camb);
+for(let i=0;i<18;i++){
+  const a=i/18*TAU,ph=Math.random()*6,pts3=[];
+  for(let k=0;k<=40;k++){const y=.05+k/40*(H-.1),r=trunkR(y)*.74+.02*Math.sin(y*9+ph);
+    const an=a+.12*Math.sin(y*3+ph);pts3.push(new THREE.Vector3(Math.cos(an)*r,y,Math.sin(an)*r));}
+  lay('canal').add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts3),M('canal',{line:true,op:.9})));
+}
+// xylem
+const xy=new THREE.CylinderGeometry(.24,.4,H,20,8,true);
+const xA=new THREE.Mesh(xy,M('xylem',{op:.22,add:true})),xB=new THREE.Mesh(xy,M('xylem',{wire:true,op:.6,add:true}));
+xA.position.y=xB.position.y=H/2;lay('xylem').add(xA,xB);
+// branches + leaves
+const Y=new THREE.Vector3(0,1,0),tips=[];
+for(let i=0;i<5;i++){
+  const a=i/5*TAU+.4,d=new THREE.Vector3(Math.cos(a)*.85,.7+(i%2)*.15,Math.sin(a)*.85).normalize(),len=1.25+(i%3)*.15;
+  const g=new THREE.CylinderGeometry(.06,.13,len,10,3,true);
+  const br=new THREE.Mesh(g,M('bark',{wire:true,op:.7,add:true}));
+  br.quaternion.setFromUnitVectors(Y,d);br.position.set(0,TOP-.05,0).addScaledVector(d,len/2);
+  lay('bark').add(br);tips.push(new THREE.Vector3(0,TOP-.05,0).addScaledVector(d,len));
+  const d2=d.clone().applyAxisAngle(new THREE.Vector3(0,1,0),.7).add(new THREE.Vector3(0,.2,0)).normalize();
+  const s0=new THREE.Vector3(0,TOP-.05,0).addScaledVector(d,len*.6),tw=new THREE.Mesh(new THREE.CylinderGeometry(.03,.06,.6,8,1,true),M('bark',{wire:true,op:.6,add:true}));
+  tw.quaternion.setFromUnitVectors(Y,d2);tw.position.copy(s0).addScaledVector(d2,.3);lay('bark').add(tw);tips.push(s0.clone().addScaledVector(d2,.6));
+}
+const LN=tips.length*60,leafBase=[];
+const leafMesh=new THREE.InstancedMesh(leafGeo.clone().scale(.075,.075,.075),M('leaves',{op:.75,add:true}),LN);
+tips.forEach(t=>{for(let k=0;k<60;k++){
+  const o=new THREE.Vector3(Math.random()-.5,Math.random()-.4,Math.random()-.5).multiplyScalar(.95);
+  leafBase.push({p:t.clone().add(o),r:new THREE.Euler(Math.random()*TAU,Math.random()*TAU,Math.random()*TAU)});}});
+lay('leaves').add(leafMesh);
+const dm=new THREE.Object3D();
+function setLeaves(f){
+  leafBase.forEach((l,i)=>{dm.position.copy(l.p);dm.rotation.copy(l.r);dm.scale.setScalar(Math.max(.0001,f));dm.updateMatrix();leafMesh.setMatrixAt(i,dm.matrix);});
+  leafMesh.instanceMatrix.needsUpdate=true;
+}
+// roots
+for(let i=0;i<7;i++){
+  const a=i/7*TAU+.3,c=[];
+  for(let k=0;k<=8;k++){const t=k/8;c.push(new THREE.Vector3(Math.cos(a+t*.5)*(.15+t*1.7),-t*.95-Math.sin(t*3)*.1,Math.sin(a+t*.5)*(.15+t*1.7)));}
+  lay('roots').add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(new THREE.CatmullRomCurve3(c).getPoints(30)),M('roots',{line:true,op:.8})));
+}
+// ground rings
+const ground=new THREE.Group();
+[1,1.8,2.6,3.4].forEach(r=>{const a=[];for(let i=0;i<=96;i++)a.push(new THREE.Vector3(Math.cos(i/96*TAU)*r,0,Math.sin(i/96*TAU)*r));
+  const m=new THREE.LineBasicMaterial({transparent:true,opacity:.35});m.userData.ground=1;ground.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(a),m));});
+tree.add(ground);
+// tap wound + sap drops
+const th=125*D2R,tr=.66,drops=[];
+const wound=new THREE.Mesh(new THREE.BoxGeometry(.22,.4,.05),M('resin',{op:.5,add:true}));
+wound.position.set(Math.cos(th)*tr,1.8,Math.sin(th)*tr);wound.lookAt(wound.position.x*2,1.8,wound.position.z*2);lay('resin').add(wound);
+for(let i=0;i<7;i++){
+  const m=new THREE.Mesh(new THREE.SphereGeometry(.06,14,14),M('resin',{op:.95,add:true}));
+  const a=th+(Math.random()-.5)*.22,y=1.62-i*.17;
+  m.position.set(Math.cos(a)*(trunkR(y)+.015),y,Math.sin(a)*(trunkR(y)+.015));m.userData.i=i;
+  lay('resin').add(m);drops.push(m);
+}
+Object.values(layers).forEach(g=>tree.add(g));
+
+// palettes
+const BANDS=[
+ {id:'vis',name:'Visible',acc:'#f2bb4b',bark:0xd9a441,canal:0x45e0ff,xylem:0xf3e3b5,leaves:0x7dffb0,roots:0xb98a4a,resin:0xffd36b,ground:0x2b6f86},
+ {id:'nir',name:'Near-infrared',acc:'#ff6fe0',bark:0xff5ad9,canal:0xffffff,xylem:0xc17bff,leaves:0xff9cf0,roots:0xa04cff,resin:0xffffff,ground:0x7a2f8f},
+ {id:'therm',name:'Thermal',acc:'#ff8a3d',bark:0xff6a1a,canal:0xffe14a,xylem:0xc41e1e,leaves:0x6a3bf0,roots:0x8a1030,resin:0xfff3a0,ground:0x4a1f6e},
+ {id:'uv',name:'UV fluorescence',acc:'#a7ff4a',bark:0x6a5cff,canal:0x38f2ff,xylem:0x9a7dff,leaves:0x3fffb4,roots:0x4c3fd1,resin:0xc6ff3d,ground:0x3a2fb0},
+ {id:'xray',name:'X-ray',acc:'#bcd6ff',bark:0x8fb7ff,canal:0xffffff,xylem:0xdbe8ff,leaves:0x5f86d6,roots:0x6f95e0,resin:0xffffff,ground:0x3f5f9a}
+];
+const CHEM=[
+ {id:'suc',name:'Sucrose',v:.88,tint:0xffa24a},
+ {id:'glu',name:'Glucose',v:.42,tint:0xff6fb0},
+ {id:'fru',name:'Fructose',v:.38,tint:0x7dffb0},
+ {id:'phe',name:'Phenols',v:.56,tint:0xf6ff6a},
+ {id:'min',name:'Minerals',v:.28,tint:0x8ab4ff}
+];
+let band=BANDS[0],chem=CHEM[0];
+function paint(){
+  const src=(kids&&band.id==='vis')?KB:band;
+  for(const k in P)P[k].forEach(m=>{
+    const c=new THREE.Color(src[k]);
+    if(k==='leaves'&&kids&&band.id==='vis')c.setHex(leafOv!==null?leafOv:LC[+$('#season').value]);
+    if(k==='canal')c.lerp(new THREE.Color(chem.tint),.45);
+    m.color.copy(c);
+  });
+  ground.children.forEach(l=>l.material.color.setHex(src.ground));
+  document.documentElement.style.setProperty('--accent',band.acc);
+  $('#mL').textContent=bn(band);$('#mC').textContent=cn(chem);
+  document.querySelectorAll('#bandList .chip,#gBand .chip').forEach(c=>c.setAttribute('aria-pressed',String(c.dataset.id===band.id)));
+  document.querySelectorAll('#bars .bar').forEach(b=>b.classList.toggle('on',b.dataset.id===chem.id));
+  document.querySelectorAll('#gChem .chip').forEach(c=>c.setAttribute('aria-pressed',String(c.dataset.id===chem.id)));
+  applyDim();
+}
+[$('#bandList'),$('#gBand')].forEach(bl=>BANDS.forEach(b=>{const x=document.createElement('button');x.className='chip';x.dataset.id=b.id;x.textContent=b.name;x.onclick=()=>{band=b;paint();};bl.appendChild(x);}));
+const bars=$('#bars');
+CHEM.forEach(c=>{const d=document.createElement('button');d.className='bar chip';d.dataset.id=c.id;d.style.cssText='border:0;background:none;padding:0;width:100%';
+  d.innerHTML='<span>'+c.name+'</span><i><u style="width:'+Math.round(c.v*100)+'%"></u></i>';d.onclick=()=>{chem=c;paint();};bars.appendChild(d);});
+
+// globe dimensions
+let dim=3,gMonth=2;const dimsSeen={3:1};let sliced=false;
+const GP={vis:{land:0x4ade80,sea:0x0e3a6b,zone:0xf2bb4b,rel:0xc9a8ff},nir:{land:0xff7ae6,sea:0x2a0f4a,zone:0xffffff,rel:0xc17bff},therm:{land:0xff7a2a,sea:0x1a2c8a,zone:0xffe14a,rel:0xffffff},uv:{land:0x7c6cff,sea:0x120a4a,zone:0xc6ff3d,rel:0x38f2ff},xray:{land:0xcfe2ff,sea:0x142a52,zone:0xffffff,rel:0xdbe8ff}};
+CHEM.forEach(c=>{const b=document.createElement('button');b.className='chip';b.dataset.id=c.id;b.textContent=c.name;b.onclick=()=>{chem=c;paint();};$('#gChem').appendChild(b);});
+[3,4,5,6].forEach(n=>{const b=document.createElement('button');b.className='chip';b.dataset.d=n;b.textContent=n+'D';b.onclick=()=>{dim=n;dimsSeen[n]=1;applyDim();if(badgesReady)checkBadges();};$('#gDim').appendChild(b);});
+function setOff(el,off){el.classList.toggle('dimmed',off);el.querySelectorAll('button,input').forEach(x=>x.disabled=off);}
+function applyDim(){
+  const pal=(kids&&dim<5)?{land:0x7be37a,sea:0x3a9bff,zone:0xffd43b,rel:0xff8ad8}:GP[dim>=5?band.id:'vis'];
+  landMat.color.setHex(pal.land);seaMat.color.setHex(pal.sea);
+  places.forEach(q=>q.mesh.material.color.setHex(kids&&dim>=4?LC[gMonth]:kindCol[q.kind]));
+  const tap=dim>=4?RES[gMonth]:0;
+  mist.material.opacity=dim>=4?LEAF[gMonth]*.3:0;
+  zoneObjs.forEach(o=>{
+    const col=new THREE.Color(o.rel?pal.rel:pal.zone);
+    if(dim>=6)col.lerp(new THREE.Color(chem.tint),.55);
+    o.c.material.color.copy(col);o.ln.material.color.copy(col);
+    o.c.material.opacity=.3+tap*.3;
+    const sc=o.rel?1:1+tap*.4;o.c.scale.setScalar(sc);o.ln.scale.setScalar(sc);
+  });
+  document.querySelectorAll('#gDim .chip').forEach(c=>c.setAttribute('aria-pressed',String(+c.dataset.d===dim)));
+  $('#dimNote').textContent=DIMNOTES[mode][dim];
+  setOff($('#gTime'),dim<4);setOff($('#gBandWrap'),dim<5);setOff($('#gChemWrap'),dim<6);
+  $('#gcT').classList.toggle('off',dim<4);$('#gcL').classList.toggle('off',dim<5);$('#gcC').classList.toggle('off',dim<6);
+  $('#gT').textContent=dim>=4?MON[gMonth]:'—';$('#gL').textContent=dim>=5?bn(band):'—';$('#gC').textContent=dim>=6?cn(chem):'—';
+  $('#gPhase').textContent=dim>=4?(MON[gMonth]+': '+phs(gMonth)):'';
+  $('#gSeasonLab').textContent=MON[gMonth];
+}
+$('#gSeason').oninput=e=>{gMonth=+e.target.value;applyDim();};
+// layers, season, cut
+document.querySelectorAll('[data-layer]').forEach(i=>i.onchange=()=>{layers[i.dataset.layer].visible=i.checked;});
+const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const LEAF=[0,0,0,.05,.15,.4,.9,1,1,.7,.3,.05];
+const RES=[0,0,.15,.65,1,.8,.3,.1,0,0,0,0];
+const PH=['Deep dormancy. Sap not flowing.','Deep dormancy. Sap not flowing.','Freeze-thaw window opens. Sap begins to flow.','Peak sap flow. Warm days, freezing nights.','Late sap run. Bud break near.','Bud break. Sap turns sour. Season ends.','Full canopy. Photosynthesis stores sugar for next year.','Full canopy. Peak sugar storage.','Full canopy. Slowing growth.','Leaf colour change begins.','Leaf fall. Tree enters dormancy.','Dormant. Sugar stored in roots and trunk.'];
+let leafF=0,resF=0;
+function season(){
+  leafOv=null;const m=+$('#season').value;leafF=LEAF[m];resF=RES[m];
+  $('#seasonLab').textContent=MON[m];$('#phase').textContent=phs(m);$('#mT').textContent=MON[m];
+  setLeaves(leafF);
+  drops.forEach(d=>{const s=resF<.02?.0001:(.35+resF*.9)*(1-d.userData.i*.07);d.scale.set(s,s*1.7,s);});
+  wound.scale.setScalar(resF<.02?.0001:1);
+  if(kids)paint();
+}
+function cut(){
+  const s=+$('#cut').value/100;if(s>=.7)sliced=true;if(badgesReady)checkBadges();clip.constant=.95-1.2*s*(1/.85)*.85;
+  $('#cutLab').textContent=Math.round(s*100)+'%';$('#mZ').textContent=Math.round(s*100)+'%';
+}
+$('#season').oninput=season;$('#cut').oninput=cut;
+
+/* ---------- READING MODES: expert, simple, kids ---------- */
+const KB={bark:0xc77d3a,canal:0xffb703,xylem:0xffe8b0,leaves:0x2fbf71,roots:0xa66a3a,resin:0xffc300,ground:0x74c69d};
+const LC=[0x7ed957,0x7ed957,0xb5e48c,0xb5e48c,0x7ed957,0x2fbf71,0x2fbf71,0x2fbf71,0xffd43b,0xff7a1a,0xe03131,0xa0522d];
+let leafOv=null;
+const BNAME={expert:['Visible','Near-infrared','Thermal','UV fluorescence','X-ray'],simple:['Normal light','Infrared','Heat view','UV glow','X-ray'],kids:['Normal eyes','Spy light','Heat goggles','Glow-in-the-dark','X-ray eyes']};
+const CNAME={expert:['Sucrose','Glucose','Fructose','Phenols','Minerals'],simple:['Sugar (sucrose)','Glucose','Fructose','Flavour compounds (phenols)','Minerals'],kids:['Sweet sugar','Sugar bits','Fruit sugar','Tasty flavour','Tiny minerals']};
+const bn=b=>BNAME[mode][BANDS.indexOf(b)],cn=c=>CNAME[mode][CHEM.indexOf(c)];
+const DIMCHIP={expert:['3D','4D','5D','6D'],simple:['3D Place','4D + Time','5D + Light','6D + Contents'],kids:['3D Look','4D Seasons','5D Colours','6D Secrets']};
+const DIMNOTES={
+ expert:{3:'Space only: longitude, latitude and zoom.',4:'Adds time: spring thaw pulse and a glow that grows in the sap-flow window.',5:'Adds the spectral band: land and water recolour with the imaging band.',6:'Adds chemistry: range zones take the tint of the chosen sap compound (illustrative).'},
+ simple:{3:'Just the map: where things are, and how far you zoom.',4:'Adds time. Pick a month to see the spring thaw glow and when the sap runs.',5:'Adds a special light view. Land and water change colour, like seen through different cameras.',6:'Adds what the sap is made of. Pick an ingredient to tint the glowing maple zones. This is an illustration, not a measurement.'},
+ kids:{3:'Look at the map and zoom in and out!',4:'Pick a month! Watch the spring melt glow and the leaf pins change colour with the seasons.',5:'Put on super-vision goggles! The land and sea change colour like in a spy movie.',6:'Peek at what is inside the sap! Each ingredient gives the glow a new colour.'}
+};
+const PHM={
+ expert:PH,
+ simple:['Resting. The tree has no leaves and the sap is not flowing.','Still resting. The sap is not flowing yet.','Freezing nights and warmer days start the sap flowing.','Peak sap flow. This is syrup-making time.','The last of the sap. Buds are about to open.','Buds open and the sap turns sour. Syrup season is over.','Full leaves. The tree makes sugar from sunlight and stores it for next year.','Full leaves. The tree keeps storing sugar.','Full leaves, but growth is slowing down.','The leaves start to change colour.','The leaves fall and the tree goes to sleep.','Resting again. Sugar is stored in the roots and trunk.'],
+ kids:['Brrr! The tree is sleeping and the sap is frozen.','Still sleeping. Snow is on the ground.','Icy nights and warm days start the sap flowing!','Sap run time! Buckets are filling up for syrup.','The last of the sap. Buds are getting ready to pop.','Buds pop open! The sap tastes funny now, so syrup season is over.','Leaves are out, making sugar from sunshine!','Full of leaves, soaking up the sun.','The tree is slowing down.','Leaves turn red, orange and yellow!','Leaves fall down. Time to rest.','Sleeping! Sugar is stored in the roots and trunk.']
+};
+const phs=m=>PHM[mode][m];
+const I18N={
+ eyebrow:['Sugar Maple Tree · Museums · Holographic 6D Multi-Spectral Engine','Simplified version · A holographic map and tree you can explore','Kids view · Explore the maple tree adventure!'],
+ dhead:['','What do 3D, 4D, 5D and 6D mean?','What do 3D, 4D, 5D and 6D mean?'],
+ dsub:['','Each number adds one more kind of information to the map and the tree. Try them one at a time.','Each number unlocks a new power for the map and the tree. Try them one by one!'],
+ d3t:['','3D · Place','3D · Look'],d3:['','Three directions: east–west, north–south, and how far you zoom in.','Look at the map from left to right, up and down, and zoom in close!'],
+ d4t:['','4D · Time','4D · Seasons'],d4:['','Adds time. Slide through the months to see the spring thaw, the sap run and the leaves change.','Adds time! Slide through the months and watch the sap run, then the leaves turn red and orange.'],
+ d5t:['','5D · Light','5D · Colours'],d5:['','Adds a special camera. See the world in heat, ultraviolet or X-ray colours.','Put on super-vision goggles and see heat, glow-in-the-dark and X-ray colours!'],
+ d6t:['','6D · Contents','6D · Secrets'],d6:['','Adds what the sap is made of. Pick an ingredient to light it up.','Peek at what is inside maple sap. Pick an ingredient to make it glow!'],
+ t1:['Layer 01 · Museums & Geo Globe','Part 1 · The map','Part 1 · The maple-leaf map'],
+ h1s:['Where the sugar maple grows — and where museums tell its story','Where sugar maples grow, and the museums that tell their story','Where do maple trees live? Let’s visit!'],
+ sub1:['Drag to spin the whole globe, scroll, pinch or use + and − to zoom, tap the big gold maple leaf to dive into the maple belt, and pick 3D to 6D to add time, spectral band and sap chemistry. Museums across the maple belt preserve the tree’s cultural and botanical heritage — from Quebec’s syrup museums to living maple collections in Ontario, Vermont, New York and Maine.','Drag to turn the globe. Zoom with + and −, or pinch. Tap the big gold maple leaf to zoom in to maple country, then tap a leaf pin to read about a place or a museum. Then press 3D, 4D, 5D and 6D to add one new kind of information at a time.','Spin the whole globe! Tap the big gold 🍁 to zoom in, then tap a leaf pin to meet a place or a museum. Then press 3D, 4D, 5D and 6D to unlock a new power each time!'],
+ gl1:['1 · X lon','1 · East–west','1 · Left–right'],gl2:['2 · Y lat','2 · North–south','2 · Up–down'],gl3:['3 · Z zoom','3 · Zoom','3 · Zoom'],
+ gl4:['4 · T season','4 · Time of year','4 · Season'],gl5:['5 · λ band','5 · Light type','5 · Super-vision'],gl6:['6 · C chem','6 · Ingredient','6 · Ingredient'],
+ tl1:['1 · X yaw','1 · Turn','1 · Turn'],tl2:['2 · Y pitch','2 · Tilt','2 · Tilt'],tl3:['3 · Z cut','3 · Slice','3 · Slice'],
+ tl4:['4 · T season','4 · Time of year','4 · Season'],tl5:['5 · λ band','5 · Light type','5 · Super-vision'],tl6:['6 · C chem','6 · Ingredient','6 · Ingredient'],
+ hudSel:['Selected','Chosen place','You picked'],
+ dimH:['Dimensions','Add layers','Power-ups'],seasonL:['Season','Time of year','Month'],seasonL2:['Season','Time of year','Month'],
+ bandH:['Spectral band','Light type','Super-vision'],bandH2:['Spectral band','Light type','Super-vision'],
+ chemH:['Chemistry focus','What is inside the sap','Ingredients inside'],chemH2:['Chemistry focus','What is inside the sap','Ingredients inside'],
+ legH:['Legend','What the colours mean','Colour guide'],
+ lg0:['Big gold leaf = maple belt (tap to zoom in)','Big gold leaf = maple country (tap to zoom in)','Big gold leaf = tap to dive in!'],
+ lg1:['Sugar maple range (Acer saccharum)','Where sugar maples grow','Sugar maple home'],
+ lg2:['Red maple / other Acer species','Related maples (red maple and others)','Other maple friends'],
+ lg3:['Maple heritage museum / living collection','A museum or living maple collection','A maple museum'],
+ lg4:['Freeze-thaw gradient (sap flow belt)','Sap flow belt (freezing nights, warm days)','Sap trail (icy nights, warm days)'],
+ lg5:['Gold arcs = syrup trade routes','Gold lines = syrup trade routes','Syrup truck routes'],
+ lgStar:['Purple star (below the map) = show or hide the map tools: spin, tour, search, filters','Purple star below the map = show or hide the map tools (spin, tour, search, filters)','Purple star = open the fun map tools!'],
+ lg6:['Land (recolours in 5D and 6D)','Land (changes colour in 5D and 6D)','Land (changes colour in 5D and 6D)'],
+ lg7:['Water (recolours in 5D and 6D)','Water (changes colour in 5D and 6D)','Water (changes colour in 5D and 6D)'],
+ lg8:['Spring thaw pulse (4D and up)','Spring thaw glow (4D and up)','Spring melt glow (4D and up)'],
+ tg1:['Markers','Place pins','Maple pins'],tg2:['Gradient','Sap belt','Sap trail'],tg3:['Graticule','Grid lines','Grid lines'],tg4:['Labels','Names','Names'],tg5:['Trade arcs','Trade lines','Syrup trucks'],
+ selH:['Selected place / museum','About this place','Meet this place'],plH:['Places & Museums','Pick a place','Pick a place'],
+ t2:['Layer 02 · Sugar Maple Tree Anatomical Engine','Part 2 · The tree','Part 2 · The maple tree'],
+ h2b:['Inside the sugar maple, in six dimensions','Look inside the sugar maple','Peek inside the maple tree!'],
+ sub2:['A stylised Acer saccharum — the Sugar Maple Tree itself. Slice it open, change the imaging band, and move through the year. The matrix under the model reads out all six axes: yaw, pitch, cut, season, spectrum, chemistry. Museums use models like this to teach the freeze-thaw sap cycle.','A simple model of a sugar maple. Turn it, slice it open, change the light type and slide through the year. The six boxes under it show what you are looking at.','Spin the tree! Slice it open! Change the super-vision and slide through the months. Tap the tree to change the colour of its leaves! The six boxes show your powers.'],
+ lyH:['Anatomical layers','Parts of the tree','Tree parts'],
+ ly1:['Bark','Bark','Tree skin'],ly2:['Sap canals','Sap channels','Sap pipes'],ly3:['Xylem core','Wood core','Wood middle'],ly4:['Roots','Roots','Roots'],ly5:['Foliage','Leaves','Maple leaves'],ly6:['Tapping & sap','The tap and the sap','The tap and the sap'],
+ tdH:['Time and depth','Time and slice','Time and slice'],cutL:['Cutaway depth','Slice the trunk open','Slice the trunk open!'],
+ barsNote:['Bars show an illustrative relative profile for sugar maple sap, not measured values. Grade depends on sucrose and phenol balance.','These bars are an illustration, not real measurements.','Longer bar = more of it in the sap. These are pretend numbers, just for learning!'],
+ foot:['Sugar Maple Tree (Acer saccharum) · Museums & 6D Thermal Matrix. Geography is approximate; land outline is stylised. Tree anatomy is a simplified teaching model.','The map and the tree are simplified drawings, so details are not exact.','The map and the tree are simple drawings, not exact.'],
+ foot2:['Maple sugaring began with Indigenous peoples of northeastern North America, whose knowledge of the sugar maple long predates the museums shown here.','Indigenous peoples of northeastern North America were the first to make maple sugar and syrup.','Long ago, Indigenous peoples were the first to make maple sugar and syrup. We can still learn from them!']
+};
+const FIL={expert:['All','Regions','Museums'],simple:['All','Regions','Museums'],kids:['All','Maple lands','Museums']};
+function applyText(){
+  const i=MI[mode];
+  $$('[data-i]').forEach(e=>{const v=I18N[e.dataset.i];if(v&&v[i])e.textContent=v[i];});
+}
+function refreshNames(){
+  $$('#bandList .chip,#gBand .chip').forEach(c=>{c.textContent=bn(BANDS.filter(b=>b.id===c.dataset.id)[0]);});
+  $$('#gChem .chip').forEach(c=>{c.textContent=cn(CHEM.filter(x=>x.id===c.dataset.id)[0]);});
+  $$('#bars .bar').forEach(b=>{b.querySelector('span').textContent=cn(CHEM.filter(x=>x.id===b.dataset.id)[0]);});
+  $$('#gDim .chip').forEach(c=>{c.textContent=DIMCHIP[mode][+c.dataset.d-3];});
+  $$('#fChips .chip').forEach((c,i)=>{c.textContent=FIL[mode][i];});
+  bSp.textContent=kids?'⟳ Spin the globe':'⟳ Spin';
+  bTo.textContent=tourT?'■ Stop':(kids?'▶ Fly around!':'▶ Tour');
+  $('#q').placeholder=kids?'Search for a place…':'Search places & museums…';
+}
+/* a maple leaf that rides along the sap belt in kids mode */
+const sapLeaf=document.createElement('div');sapLeaf.className='lb camel';sapLeaf.textContent='🍁';gl.appendChild(sapLeaf);
+
+/* leaf confetti */
+const fx=$('#fx'),fc=fx.getContext('2d'),dpr=Math.min(devicePixelRatio||1,2);let FP=[],fRun=false;
+function sizeFx(){fx.width=innerWidth*dpr;fx.height=innerHeight*dpr;}
+sizeFx();addEventListener('resize',sizeFx);
+const LCOL=['#e03131','#f76707','#f59f00','#ffd43b','#c92a2a','#ff6b6b','#fab005','#e8590c'];
+const leafPath=(()=>{const h=[[0,1],[.15,.72],[.3,.8],[.26,.5],[.56,.62],[.48,.38],[.82,.38],[.62,.12],[.3,.2],[.09,-.05],[.05,-.55]];
+  const q=new Path2D();q.moveTo(h[0][0],-h[0][1]);h.forEach((v,i)=>{if(i)q.lineTo(v[0],-v[1]);});
+  for(let i=h.length-1;i>=1;i--)q.lineTo(-h[i][0],-h[i][1]);q.closePath();return q;})();
+function kick(){if(!fRun){fRun=true;requestAnimationFrame(fxLoop);}}
+function burst(x,y,n,spread){
+  n=reduce?Math.min(n,6):n;
+  for(let i=0;i<n;i++){const a=Math.random()*TAU,v=3+Math.random()*(spread||7);
+    FP.push({x:x,y:y,vx:Math.cos(a)*v,vy:Math.sin(a)*v-4,r:Math.random()*TAU,vr:(Math.random()-.5)*.35,s:6+Math.random()*9,c:LCOL[Math.random()*LCOL.length|0],life:1});}
+  kick();
+}
+function fxLoop(){
+  fc.setTransform(1,0,0,1,0,0);fc.clearRect(0,0,fx.width,fx.height);
+  FP=FP.filter(q=>q.life>0&&q.y<innerHeight+40);
+  FP.forEach(q=>{q.vy+=.28;q.vx*=.99;q.x+=q.vx;q.y+=q.vy;q.r+=q.vr;q.life-=.011;
+    fc.setTransform(dpr,0,0,dpr,0,0);fc.translate(q.x,q.y);fc.rotate(q.r);fc.scale(q.s,q.s);
+    fc.globalAlpha=Math.max(0,Math.min(1,q.life*1.6));fc.fillStyle=q.c;fc.fill(leafPath);});
+  if(FP.length)requestAnimationFrame(fxLoop);else{fRun=false;fc.setTransform(1,0,0,1,0,0);fc.clearRect(0,0,fx.width,fx.height);}
+}
+function confetti(){
+  if(reduce)return;
+  for(let i=0;i<40;i++)FP.push({x:Math.random()*innerWidth,y:-20-Math.random()*60,vx:(Math.random()-.5)*2,vy:1+Math.random()*2,r:Math.random()*TAU,vr:(Math.random()-.5)*.3,s:7+Math.random()*9,c:LCOL[Math.random()*LCOL.length|0],life:1.5});
+  kick();
+}
+function fun(x,y,n){burst(x,y,n);}
+let lastTrail=0;
+document.addEventListener('pointermove',e=>{
+  if(!kids||reduce||e.pointerType==='touch')return;const now=performance.now();if(now-lastTrail<60)return;lastTrail=now;
+  FP.push({x:e.clientX,y:e.clientY,vx:(Math.random()-.5)*1.5,vy:-Math.random(),r:Math.random()*TAU,vr:.1,s:3+Math.random()*4,c:LCOL[Math.random()*LCOL.length|0],life:.7});kick();});
+document.addEventListener('click',e=>{
+  if(!kids)return;const b=e.target.closest('button.chip,.pad button,label.chk,.flip');if(!b)return;
+  let x=e.clientX,y=e.clientY;if(!x&&!y){const r=b.getBoundingClientRect();x=r.left+r.width/2;y=r.top+r.height/2;}
+  burst(x,y,7,5);});
+
+/* flip cards */
+[['Sweet sap','Sugar maples store food over winter. In late winter it turns into the sweet sap we make syrup from.'],['Freeze and thaw','Sap only runs well when nights freeze and days warm up.'],['A leaf on a flag','The maple leaf is a symbol of Canada and is on its flag.'],['Big batch','It takes roughly 40 litres of sap to make 1 litre of maple syrup.'],['First makers','Indigenous peoples were the first to make maple sugar and syrup, long before museums.']].forEach(f=>{
+  const b=document.createElement('button');b.type='button';b.className='flip';b.innerHTML='<small>Tap to flip</small>'+f[0];let on=false;
+  b.onclick=()=>{on=!on;b.innerHTML=on?'<small>Fact</small>'+f[1]:'<small>Tap to flip</small>'+f[0];};$('#flips').appendChild(b);});
+
+/* game: catch the sap */
+const NSV='http://www.w3.org/2000/svg';
+let game=null,best=0;
+const dropsG=$('#drops');
+function sapdrop(){
+  const g=document.createElementNS(NSV,'g');g.style.cursor='pointer';
+  const p=document.createElementNS(NSV,'path');p.setAttribute('d','M0,-16 C9,-2 11,6 0,14 C-11,6 -9,-2 0,-16Z');p.setAttribute('fill','#f7b733');p.setAttribute('stroke','#35176b');p.setAttribute('stroke-width','2.5');g.appendChild(p);
+  const c=document.createElementNS(NSV,'circle');c.setAttribute('r','26');c.setAttribute('fill','transparent');g.appendChild(c);return g;
+}
+function endGame(){
+  const g=game;game=null;$('#gStart').textContent='Play again';$('#gStart').disabled=false;
+  const stars=g.score>=15?3:g.score>=8?2:1;
+  $('#gResult').textContent='Time! You caught '+g.score+'. '+'★'.repeat(stars)+'☆'.repeat(3-stars);
+  best=Math.max(best,g.score);checkBadges();if(stars===3)confetti();dropsG.textContent='';
+}
+$('#gStart').onclick=()=>{
+  dropsG.textContent='';game={score:0,miss:0,t:30,last:0,spawn:0,items:[]};
+  $('#gStart').disabled=true;$('#gResult').textContent='Go go go!';
+  $('#gScore').textContent=0;$('#gMiss').textContent=0;$('#gmTime').textContent=30;requestAnimationFrame(gloop);
+};
+function gloop(ts){
+  const g=game;if(!g)return;
+  if(!g.last)g.last=ts;const dt=Math.min(.05,(ts-g.last)/1000);g.last=ts;g.t-=dt;g.spawn-=dt;
+  if(g.spawn<=0){
+    const e=sapdrop(),it={e:e,x:200+(Math.random()-.5)*150,y:250,v:70+Math.random()*60+(30-g.t)*2.5};
+    e.addEventListener('pointerdown',ev=>{ev.preventDefault();if(it.dead)return;it.dead=true;g.score++;$('#gScore').textContent=g.score;e.style.opacity=0;e.style.transition='opacity .25s';setTimeout(()=>e.remove(),260);});
+    dropsG.appendChild(e);g.items.push(it);g.spawn=.55+Math.random()*.6;
+  }
+  g.items.forEach(it=>{if(it.dead)return;it.y+=it.v*dt;it.e.setAttribute('transform','translate('+it.x+','+it.y+')');
+    if(it.y>372){it.dead=true;g.miss++;$('#gMiss').textContent=g.miss;it.e.remove();}});
+  g.items=g.items.filter(i=>!i.dead);
+  $('#gmTime').textContent=Math.max(0,Math.ceil(g.t));
+  if(g.t<=0){endGame();return;}
+  requestAnimationFrame(gloop);
+}
+
+/* quiz */
+const QZ=[['Maple syrup is made from…',['The sap of a maple tree','Crushed maple leaves','Maple seeds'],0],['When does sap run best?',['Freezing nights and warmer days','Hot summer days','When the leaves fall'],0],['Which country has a maple leaf on its flag?',['Canada','Brazil','Egypt'],0],['What do sugar maple leaves do in fall?',['Turn red, orange and yellow','Turn blue','Stay green all winter'],0],['How do people collect the sap?',['With a small tap and a bucket or tube','They shake the tree','They pick the leaves'],0]];
+let qi=0,qs=0,locked=false,quizPerfect=false;
+function renderQ(){
+  const box=$('#quiz');box.textContent='';
+  if(qi>=QZ.length){
+    const p=document.createElement('p');p.className='q';p.textContent='You got '+qs+' out of '+QZ.length+'! '+'★'.repeat(Math.max(1,Math.round(qs/QZ.length*3)));box.appendChild(p);
+    const b=document.createElement('button');b.className='btn';b.type='button';b.textContent='Try again';b.onclick=()=>{qi=0;qs=0;renderQ();};box.appendChild(b);
+    if(qs===QZ.length){quizPerfect=true;checkBadges();confetti();}return;
+  }
+  const q=QZ[qi],pg=document.createElement('div');pg.className='prog';pg.textContent='Question '+(qi+1)+' of '+QZ.length;box.appendChild(pg);
+  const h=document.createElement('p');h.className='q';h.textContent=q[0];box.appendChild(h);
+  const o=document.createElement('div');o.className='opts';box.appendChild(o);locked=false;let missed=false;
+  q[1].map((t,i)=>i).sort(()=>Math.random()-.5).forEach(i=>{const b=document.createElement('button');b.className='opt';b.type='button';b.textContent=q[1][i];
+    b.onclick=()=>{if(locked)return;if(i===q[2]){locked=true;b.classList.add('good');if(!missed)qs++;setTimeout(()=>{qi++;renderQ();},700);}else{missed=true;b.classList.add('bad');}};o.appendChild(b);});
+}
+renderQ();
+
+/* badges */
+const BD=[
+ ['Map explorer','Visit Quebec, Ontario and Vermont',()=>['quebec','ontario','vermont'].every(i=>seenPl[i])],
+ ['Museum visitor','Visit 3 museums on the map',()=>places.filter(p=>p.kind==='museum'&&seenPl[p.id]).length>=3],
+ ['Power user','Try 3D, 4D, 5D and 6D',()=>[3,4,5,6].every(n=>dimsSeen[n])],
+ ['Tree surgeon','Slice the trunk open',()=>sliced],
+ ['Sap catcher','Catch 10 sap drops in the game',()=>best>=10],
+ ['Quiz star','Get every answer right first try',()=>quizPerfect]];
+const gotB={};
+BD.forEach(b=>{const d=document.createElement('div');d.className='badge';d.innerHTML='<b>★</b><span><strong>'+b[0]+'</strong><br><small>'+b[1]+'</small></span>';$('#badges').appendChild(d);b.push(d);});
+function checkBadges(){BD.forEach((b,i)=>{if(!gotB[i]&&b[2]()){gotB[i]=1;b[3].classList.add('got');if(mode==='kids')confetti();}});}
+
+/* the mode switch */
+function setMode(m,fromHash){
+  mode=m;kids=(m==='kids');
+  document.body.classList.toggle('simple',m==='simple');document.body.classList.toggle('kids',kids);
+  $$('.seg button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.m===m)));
+  if(!fromHash){try{history.replaceState(null,'','#'+m);}catch(e){}}
+  applyText();refreshNames();select(curSel);season();cut();paint();remeasureLB();
+  if(kids&&!fromHash){const r=$('.seg button[data-m=kids]').getBoundingClientRect();burst(r.left+r.width/2,r.top+r.height/2,44,9);}
+}
+$$('.seg button').forEach(b=>b.onclick=()=>setMode(b.dataset.m));
+addEventListener('hashchange',()=>{const h=location.hash.slice(1);if(MI[h]!==undefined)setMode(h,true);});
+
+
+const tst={vx:0,focus:null};dragger(tCanvas,tree,tst);
+tst.onTap=e=>{if(!kids)return;leafOv=[0xff6b6b,0xffd43b,0x69db7c,0x4dabf7,0xda77f2,0xff922b][Math.random()*6|0];paint();fun(e.clientX,e.clientY,24,1);};
+tree.rotation.x=.12;
+season();cut();paint();
+badgesReady=true;
+{const h0=location.hash.slice(1);setMode(MI[h0]!==undefined?h0:'simple',true);}
+
+/* ---------- LOOP ---------- */
+let t0=0,vis=true;
+document.addEventListener('visibilitychange',()=>{vis=!document.hidden;});
+function norm(a){return ((a%TAU)+TAU)%TAU;}
+function frame(t){
+  requestAnimationFrame(frame);
+  if(!vis)return;
+  fit(gR,gCam,gCanvas,setDist);fit(tR,tCam,tCanvas,tDist);
+  {const dy=((rotT.y-globe.rotation.y+Math.PI)%TAU+TAU)%TAU-Math.PI;globe.rotation.y+=dy*.16;globe.rotation.x+=(rotT.x-globe.rotation.x)*.16;}gCam.position.z+=(tgt.z-gCam.position.z)*.2;
+  {const cx=gCam.position.x,cy=gCam.position.y,zz=Math.sqrt(Math.max(0,1-cx*cx-cy*cy));
+   
+   const la=globe.rotation.x/D2R,lo=(((-globe.rotation.y/D2R+180)%360)+360)%360-180;
+   $('#gX').textContent=Math.abs(lo).toFixed(1)+'°'+(lo>=0?'E':'W');$('#gY').textContent=Math.abs(la).toFixed(1)+'°'+(la>=0?'N':'S');
+   $('#gZ').textContent=(homeZ(gCam)/gCam.position.z).toFixed(2)+'×';}
+  if(spin&&!reduce)rotT.y+=.0016;
+  arcDots.forEach(o=>{o.d.position.copy(o.pts[Math.floor(((t*.00011+o.off)%1)*(o.pts.length-1))]);});
+  const zc=gCam.position.z,zf=Math.max(.45,Math.min(4.5,(zc-.95)/.9)),far=zc>2.5;
+  landMat.size=.0085*Math.max(.8,Math.min(3.4,zf));
+  places.forEach(q=>{const vis=q.ok&&!far&&(q.kind!=='museum'||zc<=2.0||q.id===curSel);q.mesh.visible=vis;q.ring.visible=vis;
+    q.mesh.scale.setScalar(q.base*zf*(q.id===curSel?1.5:1)*(kids&&!reduce?1+.2*Math.sin(t*.006+q.lat):1));});
+  beltLeaf.visible=far;beltLeaf.scale.setScalar(.026*zf*(1+.1*Math.sin(t*.004)));
+  arcs.visible=arcsOn&&!far;route.visible=routeOn&&zc<3.0;
+  rings.forEach(r=>{const f=((t*.0007)+r.userData.ph)%1;r.scale.setScalar((1+f*1.6)*.3*zf);r.material.opacity=(1-f)*.8;});
+  const pi=Math.floor((t*.00012%1)*(path.length-1));caravan.position.copy(path[pi]);
+  if(!tst.down()){tree.rotation.y+=tst.vx;tst.vx*=.94;if(!reduce)tree.rotation.y+=.0022;}
+  const pulse=.55+.45*Math.sin(t*.003);
+  P.canal.forEach(m=>{if(m.isLineBasicMaterial)m.opacity=.55+.4*pulse;});
+  $('#mX').textContent=Math.round(norm(tree.rotation.y)/D2R)+'°';
+  $('#mY').textContent=Math.round(tree.rotation.x/D2R)+'°';
+  gR.render(gS,gCam);tR.render(tS,tCam);updLB();
+  if(kids&&route.visible){tmpV.copy(caravan.position).applyMatrix4(globe.matrixWorld);const op=Math.max(0,Math.min(1,(tmpV.dot(gCam.position)-1.02)/.4));
+    if(op>0){tmpV.project(gCam);sapLeaf.style.opacity=op;sapLeaf.style.transform='translate('+(((tmpV.x*.5+.5)*gCanvas.clientWidth)-14).toFixed(1)+'px,'+(((-tmpV.y*.5+.5)*gCanvas.clientHeight)-26).toFixed(1)+'px)';}else sapLeaf.style.opacity=0;}else sapLeaf.style.opacity=0;
+}
+requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
